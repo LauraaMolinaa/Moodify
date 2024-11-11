@@ -24,3 +24,6 @@ Our app will have the following features:
     - their general mood of the month
     - a chart showing the moods of the month
     - a personalized message according to the user's mood of the month
+
+## General look of the app
+![alt text](<Screenshot 2024-11-11 at 9.49.43 AM.png>)
