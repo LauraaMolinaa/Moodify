@@ -1,6 +1,13 @@
 # Moodify
 
 ## Description of application 
+A heath and weallness application to track the user's mental health. 
+
+It features a mood tracker, a gratefullness diary and a regular diary. 
+
+Thanks to our app, the user can track trends in their mental health.
+
+We also provide a page with available ressources for mental health in Canada.
 
 ## Application Scope 
 Our app will have the following features:  
