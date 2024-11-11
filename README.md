@@ -1,4 +1,6 @@
 # Moodify
+<img src="https://github.com/user-attachments/assets/c53a664f-8be5-4f76-9ae1-65e18c398663" width="100">
+
 
 ## Description of application 
 A heath and weallness application to track the user's mental health. 
@@ -27,3 +29,4 @@ Our app will have the following features:
 
 ## General look of the app
 ![alt text](<Screenshot 2024-11-11 at 9.49.43 AM.png>)
+
