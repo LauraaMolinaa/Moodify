@@ -27,6 +27,9 @@ Our app will have the following features:
     - a chart showing the moods of the month
     - a personalized message according to the user's mood of the month
 
+6. A local database where the user's mood, diary entries, and bullet points will be saved.
+
+7. An AI feature that will help the user come up with diary prompts.
 ## General look of the app
 ![alt text](<Screenshot 2024-11-11 at 9.49.43 AM.png>)
 
