@@ -4,23 +4,27 @@
 #### By Veronika Vilenski, Patricia Dolecki, Rania Mustafa and Laura Molina
 
 ## Description of application 
-A heath and weallness application to track the user's mental health. 
+Moodify is a health and wellness app that helps users track and improve their mental well-being.
 
-It features a mood tracker, a gratefullness diary and a regular diary. 
+It includes a mood tracker to log daily emotions, a gratitude diary to note three aspects of life you’re thankful for each day, and a personal journal for reflecting on thoughts and feelings.
 
-Thanks to our app, the user can track trends in their mental health.
+Moodify encourages positivity and mindfulness as part of a daily routine.
 
-We also provide a page with available ressources for mental health in Canada.
+The app also features a Resource Hub with mental health support options in Canada, such as hotlines and helpful websites.
+
+A statistics page provides insights into trends and patterns in users' mental health over time.
+
+With a calming design, Moodify offers a comforting space to promote emotional wellness and self-awareness!
 
 ## Application Scope 
 Our app will have the following features:  
 1. A main page with a button for each screen.
 
-2. The mood board where the user can enter a color represeting their mood given a color palette. 
+2. The mood board where the user can enter a color representing their mood given a color palette. 
 
-3. A ressources page where the user can find help such as hotlines and websites.
+3. Resources page with access to mental health support options.
 
-4. A diary and three bullet points where you have to enter three things you are grateful for. The user does not have to do a diary entry everyday, however they do have to fill out the three bullet points. 
+4. A diary coupled with three bullet points where you have to enter three things you are grateful for. 
 
 5. A statics page where the user can see:
     - their adherence to the app
