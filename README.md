@@ -38,3 +38,5 @@ Our app will have the following features:
 ## General look of the app
 ![alt text](<Screenshot 2024-11-11 at 9.49.43 AM.png>)
 
+## Road Map 
+![Notion link](<https://cold-allium-2b3.notion.site/moodify-project-appdevproject47592758248?pvs=4>)
