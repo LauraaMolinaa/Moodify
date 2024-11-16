@@ -37,7 +37,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\vvile\Downloads\moon-solid.svg" />
+                                                <entry key="imagePath" value="C:\Users\vvile\Downloads\calendar-solid.svg" />
                                                 <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
@@ -71,8 +71,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\vvile\Downloads\moon-solid.svg" />
-                                      <entry key="outputName" value="ic_moon" />
+                                      <entry key="imageAsset" value="C:\Users\vvile\Downloads\calendar-solid.svg" />
+                                      <entry key="outputName" value="ic_mood_board" />
                                     </map>
                                   </option>
                                 </PersistentState>

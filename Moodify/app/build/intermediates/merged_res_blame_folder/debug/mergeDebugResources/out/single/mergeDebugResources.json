@@ -1,114 +1,214 @@
 [
     {
-        "merged": "com.example.moodify.app-debug-47:/xml_backup_rules.xml.flat",
-        "source": "com.example.moodify.app-main-49:/xml/backup_rules.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_resources.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_resources.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-hdpi_ic_moon.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-hdpi/ic_moon.png"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_diary.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_diary.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-xhdpi_ic_sun.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-xhdpi/ic_sun.png"
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_stats.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_stats.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_sun.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_sun.xml"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/font_kalam_regular.ttf.flat",
-        "source": "com.example.moodify.app-main-49:/font/kalam_regular.ttf"
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_home.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_home.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.moodify.app-main-49:/xml/data_extraction_rules.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_moon.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_moon.xml"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_mood_board.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_mood_board.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_diary.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_diary.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_moon.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_moon.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-mdpi_ic_sun.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-mdpi/ic_sun.png"
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_moon.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_moon.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-hdpi_ic_sun.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-hdpi/ic_sun.png"
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_sun.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_sun.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_sun.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_sun.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "com.example.moodify.app-debug-53:/font_kalam_bold.ttf.flat",
+        "source": "com.example.moodify.app-main-55:/font/kalam_bold.ttf"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-xxhdpi_ic_sun.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-xxhdpi/ic_sun.png"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/font_kalam_bold.ttf.flat",
-        "source": "com.example.moodify.app-main-49:/font/kalam_bold.ttf"
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_diary.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_diary.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-xxhdpi_ic_moon.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-xxhdpi/ic_moon.png"
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_home.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_home.xml"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-anydpi_ic_sun.xml.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-anydpi/ic_sun.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_stats.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_stats.xml"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_moon.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_moon.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-xhdpi_ic_moon.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-xhdpi/ic_moon.png"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.moodify.app-main-49:/drawable/ic_launcher_background.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_stats.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_stats.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.moodify.app-debug-53:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-mdpi_ic_moon.png.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-mdpi/ic_moon.png"
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_home.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_home.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.moodify.app-main-49:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.moodify.app-main-49:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_resources.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_resources.png"
     },
     {
-        "merged": "com.example.moodify.app-debug-47:/drawable-anydpi_ic_moon.xml.flat",
-        "source": "com.example.moodify.app-main-49:/drawable-anydpi/ic_moon.xml"
+        "merged": "com.example.moodify.app-debug-53:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_diary.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_diary.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_home.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_home.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_stats.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_stats.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_mood_board.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_mood_board.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_resources.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_resources.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/font_kalam_regular.ttf.flat",
+        "source": "com.example.moodify.app-main-55:/font/kalam_regular.ttf"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_resources.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_resources.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.moodify.app-main-55:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_sun.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_sun.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_stats.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_stats.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xhdpi_ic_moon.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xhdpi/ic_moon.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_mood_board.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_mood_board.xml"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-mdpi_ic_mood_board.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-mdpi/ic_mood_board.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_diary.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_diary.xml"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_home.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_home.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/xml_backup_rules.xml.flat",
+        "source": "com.example.moodify.app-main-55:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-anydpi_ic_resources.xml.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-anydpi/ic_resources.xml"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-xxhdpi_ic_sun.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-xxhdpi/ic_sun.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/drawable-hdpi_ic_mood_board.png.flat",
+        "source": "com.example.moodify.app-main-55:/drawable-hdpi/ic_mood_board.png"
+    },
+    {
+        "merged": "com.example.moodify.app-debug-53:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.moodify.app-main-55:/mipmap-anydpi-v26/ic_launcher.xml"
     }
 ]

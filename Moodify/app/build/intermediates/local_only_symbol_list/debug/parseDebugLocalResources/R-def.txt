@@ -7,9 +7,14 @@ color purple_700
 color teal_200
 color teal_700
 color white
+drawable ic_diary
+drawable ic_home
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_mood_board
 drawable ic_moon
+drawable ic_resources
+drawable ic_stats
 drawable ic_sun
 font kalam_bold
 font kalam_regular
