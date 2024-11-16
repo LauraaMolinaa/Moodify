@@ -56,7 +56,7 @@ fun HomeScreen() {
             Spacer(modifier = Modifier.height(24.dp))
 
             // Main buttons
-            val buttonTexts = listOf("Mood Tracker", "Diary", "Resources", "Statistics")
+            val buttonTexts = listOf("Mood Tracker", "Diary", "Statistics", "Resources")
             buttonTexts.forEach { text ->
                 Button(
                     onClick = { /* TODO: Navigate to respective screen */ },
@@ -71,19 +71,6 @@ fun HomeScreen() {
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Stats button
-            Button(
-                onClick = { /* TODO: Navigate to Stats */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
-            ) {
-                Text(text = "Stats", color = MaterialTheme.colorScheme.onPrimary)
-            }
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -103,7 +90,7 @@ fun BottomNavigationBar() {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Replace these icons with your actual icons
+
         val navItems = listOf("Home", "Stats", "Diary")
         navItems.forEach { item ->
             Text(
