@@ -36,6 +36,7 @@ fun HomeScreen() {
             when (selectedScreen) {
                 "Home" -> HomeScreenContent()
                 "MoodBoard" -> MoodBoardScreenContent(isDarkTheme = isDarkTheme, onToggleTheme = { isDarkTheme = !isDarkTheme })
+                "Resources" -> ResourceScreen()
             }
         }
     }
