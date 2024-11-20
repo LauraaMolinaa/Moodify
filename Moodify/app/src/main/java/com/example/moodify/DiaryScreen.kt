@@ -1,20 +1,36 @@
 package com.example.moodify
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.ai.client.generativeai.BuildConfig
 import com.google.ai.client.generativeai.GenerativeModel
-import kotlinx.coroutines.launch
+import com.google.ai.client.generativeai.type.generationConfig
 
+
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -22,6 +38,12 @@ fun DiaryScreen(
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
+
+    var input1 by remember { mutableStateOf("") }
+    var input2 by remember { mutableStateOf("") }
+    var input3 by remember { mutableStateOf("") }
+    var entry by remember { mutableStateOf("") }
+    var aiResponse by remember { mutableStateOf("") }
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -35,29 +57,198 @@ fun DiaryScreen(
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { /* TODO: Navigate to respective screen */ },
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            )
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)
+                            )
+                        )
+                    )
+                    .padding(24.dp)
+                    .animateContentSize()
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Gratitude",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { /* TODO: Navigate to screen */ },
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            )
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)
+                            )
+                        )
+                    )
+                    .padding(24.dp)
+                    .animateContentSize(),
+                contentAlignment = Alignment.Center // Centers the content inside the Box
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(5.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally, // Centers items horizontally
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    // First input field
+                    OutlinedTextField(
+                        value = input1,
+                        onValueChange = { input1 = it },
+                        label = { Text("Input 1") },
+                    )
+                    // Second input field
+                    OutlinedTextField(
+                        value = input2,
+                        onValueChange = { input2 = it },
+                        label = { Text("Input 2") },
+                    )
+                    // Third input field
+                    OutlinedTextField(
+                        value = input3,
+                        onValueChange = { input3 = it },
+                        label = { Text("Input 3") },
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { /* TODO: Navigate to screen */ },
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            )
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)
+                            )
+                        )
+                    )
+                    .padding(24.dp)
+                    .animateContentSize(),
+                contentAlignment = Alignment.Center // Centers the content inside the Box
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(5.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally, // Centers items horizontally
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    Text(
+                        text = "Diary",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start
+                    )
+                    OutlinedTextField(
+                        value = entry,
+                        onValueChange = { entry = it },
+                        label = { Text("Diary entry") },
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { /* TODO: Navigate to respective screen */ },
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            )
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(), // Ensures the Box takes all available height
+                contentAlignment = Alignment.Center // Centers content within the Box
+            ) {
+                Text(
+                    text = if (aiResponse.isEmpty()) "Click 'Give me a prompt' to get a prompt related to your 3 gratitudes" else aiResponse,
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
         Button(
             onClick = {
                 coroutineScope.launch {
-                    TestAI()
+                    aiResponse = TestAI().toString()
                 }
             }
         ) {
-            Text(text = "Change theme", color = Color.Black)
+            Text(text = "Give me a prompt", color = Color.Black)
         }
 
     }
 }
 
-suspend fun TestAI(){
-
+suspend fun TestAI(): String? {
     val generativeModel =
         GenerativeModel(
-            // Specify a Gemini model appropriate for your use case
             modelName = "gemini-1.5-flash",
-            // Access your API key as a Build Configuration variable (see "Set up your API key" above)
-            apiKey = "AIzaSyDifeMDYs58VxHezWGHoNRvNtlZKUsdr0g")
+            apiKey = "AIzaSyAtIdTjCKJYiSRGOvkDu1910xGwgdwUSbs" ,
+        )
 
-    val prompt = "Write a story about a magic backpack."
+    val prompt = "Tell me a short joke!"
     val response = generativeModel.generateContent(prompt)
-    print(response.text)
+    return response.text
 }
