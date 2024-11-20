@@ -1,6 +1,8 @@
 package com.example.moodify
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,11 +11,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,6 +56,7 @@ fun ResourceScreenPreview() {
 
 @Composable
 fun ResourceScreen(mod: Modifier = Modifier) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,72 +73,137 @@ fun ResourceScreen(mod: Modifier = Modifier) {
             textAlign = TextAlign.Center
         )
 
-        //contents of page
+        //Content of resource page
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 10.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.05f),
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(4.dp)
         ) {
-            Column(
-                modifier = Modifier.fillMaxWidth()
+
+            //contents of page
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
             ) {
-
-                //phone numbers
-                Text(
-                    "Phone numbers:",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.fillMaxWidth().padding(6.dp),
-                    textAlign = TextAlign.Start
-                )
-                LazyColumn(Modifier.padding(10.dp)) {
-                    items(items = phoneNumbers) { number ->
+                Box {
+                    Column {
+                        //phone numbers
                         Text(
-                            number,
-                            color = MaterialTheme.colorScheme.primary
+                            "Phone numbers:",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(6.dp),
+                            textAlign = TextAlign.Start
                         )
+                        LazyColumn(Modifier.padding(10.dp)) {
+                            items(items = phoneNumbers) { number ->
+                                Text(
+                                    number,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
                     }
                 }
+            }
+        }
 
-                //websites
-                Text(
-                    "Websites:",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.fillMaxWidth().padding(6.dp),
-                    textAlign = TextAlign.Start
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp)
+                .background(
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.05f),
+                    shape = RoundedCornerShape(16.dp)
                 )
-                LazyColumn(Modifier.padding(10.dp)) {
-                    items(items = websites) { number ->
+                .padding(4.dp)
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
+            ) {
+                Box() {
+                    Column {
+                        //websites
                         Text(
-                            number,
-                            color = MaterialTheme.colorScheme.primary
+                            "Websites:",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(6.dp),
+                            textAlign = TextAlign.Start
                         )
+                        LazyColumn(Modifier.padding(10.dp)) {
+                            items(items = websites) { number ->
+                                Text(
+                                    number,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
                     }
-                }
 
-                //apps
-                Text(
-                    "Apps:",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.fillMaxWidth().padding(6.dp),
-                    textAlign = TextAlign.Start
+                }
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp)
+                .background(
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.05f),
+                    shape = RoundedCornerShape(16.dp)
                 )
-                LazyColumn(Modifier.padding(10.dp)) {
-                    items(items = apps) { number ->
+                .padding(4.dp)
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
+            ) {
+                Box {
+                    Column {
+                        //apps
                         Text(
-                            number,
-                            color = MaterialTheme.colorScheme.primary
+                            "Apps:",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(6.dp),
+                            textAlign = TextAlign.Start
                         )
+                        LazyColumn(Modifier.padding(10.dp)) {
+                            items(items = apps) { number ->
+                                Text(
+                                    number,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
                     }
                 }
             }
