@@ -63,6 +63,15 @@ fun MoodBoardScreenContent(isDarkTheme: Boolean, onToggleTheme: () -> Unit) {
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun DiaryScreenContent(isDarkTheme: Boolean, onToggleTheme: () -> Unit) {
+    DiaryScreen(
+        isDarkTheme = isDarkTheme,
+        onToggleTheme = onToggleTheme
+    )
+}
+
 
 @Composable
 fun MainButtonsWithPlaceholders() {

@@ -4,24 +4,7 @@
             "outputFile": "com.example.moodify.app-mergeDebugResources-51:/values-da/values-da.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\vvile\\.gradle\\caches\\transforms-4\\9e83af5bd42b449d0d9f0f5f579b220f\\transformed\\foundation-release\\res\\values-da\\values-da.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,145",
-                        "endColumns": "89,86",
-                        "endOffsets": "140,227"
-                    },
-                    "to": {
-                        "startLines": "84,85",
-                        "startColumns": "4,4",
-                        "startOffsets": "8468,8558",
-                        "endColumns": "89,86",
-                        "endOffsets": "8553,8640"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\vvile\\.gradle\\caches\\transforms-4\\24a619a7beb76fb357e572adae1b0f5b\\transformed\\ui-release\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\patid\\.gradle\\caches\\transforms-4\\6266e6ebc66c44d5434e948e058cd86f\\transformed\\ui-release\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\vvile\\.gradle\\caches\\transforms-4\\a475b7e93c752f932fb8c03099fd5fdc\\transformed\\material3-release\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\patid\\.gradle\\caches\\transforms-4\\941093d9658a059bb7c095dea80add38\\transformed\\material3-release\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\vvile\\.gradle\\caches\\transforms-4\\904e71d8be6f128308327ad585e1a0f4\\transformed\\core-1.13.1\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\patid\\.gradle\\caches\\transforms-4\\7830e51ef6bc18dce3c068fb9f238b89\\transformed\\foundation-release\\res\\values-da\\values-da.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,145",
+                        "endColumns": "89,86",
+                        "endOffsets": "140,227"
+                    },
+                    "to": {
+                        "startLines": "84,85",
+                        "startColumns": "4,4",
+                        "startOffsets": "8468,8558",
+                        "endColumns": "89,86",
+                        "endOffsets": "8553,8640"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\patid\\.gradle\\caches\\transforms-4\\fdd2a03309a3291005ae5b40e5f44324\\transformed\\core-1.13.1\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
