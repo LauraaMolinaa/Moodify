@@ -66,7 +66,7 @@ dependencies {
 
     implementation(libs.generativeai)
 
-    implementation("com.github.fracassi-marco:JetChart:1.4.1"
+    implementation(libs.jetchart)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
