@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.moodify"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.generativeai)
+
+    implementation("com.github.fracassi-marco:JetChart:1.4.1"
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
