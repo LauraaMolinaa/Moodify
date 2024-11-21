@@ -15,6 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.moodify.ui.theme.MoodifyTheme
 
+
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(BottomNavItem.Home.route) { HomeScreenContent() }
                         composable(BottomNavItem.MoodBoard.route) { MoodBoardScreenContent(isDarkTheme, onToggleTheme = { isDarkTheme = !isDarkTheme }) }
+                        composable(BottomNavItem.Stats.route) { StatScreen() }
                         composable(BottomNavItem.Resources.route) { ResourceScreen() }
                         // TODO: Add more routes as the screens are created
                     }
