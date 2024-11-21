@@ -3,11 +3,13 @@ package com.example.moodify
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -60,7 +62,8 @@ fun ResourceScreen(mod: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 5.dp),
+            .padding(horizontal = 16.dp, vertical = 5.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center
     ) {
         //title of the page
@@ -83,6 +86,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(4.dp)
+                .height(180.dp)
         ) {
 
             //contents of page
@@ -129,6 +133,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(4.dp)
+                .height(340.dp)
         ) {
             Card(
                 modifier = Modifier
@@ -152,9 +157,9 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             textAlign = TextAlign.Start
                         )
                         LazyColumn(Modifier.padding(10.dp)) {
-                            items(items = websites) { number ->
+                            items(items = websites) {  site ->
                                 Text(
-                                    number,
+                                    site,
                                     color = MaterialTheme.colorScheme.primary
                                 )
                             }
@@ -174,6 +179,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(4.dp)
+                .height(180.dp)
         ) {
             Card(
                 modifier = Modifier
@@ -197,9 +203,9 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             textAlign = TextAlign.Start
                         )
                         LazyColumn(Modifier.padding(10.dp)) {
-                            items(items = apps) { number ->
+                            items(items = apps) {  app ->
                                 Text(
-                                    number,
+                                    app,
                                     color = MaterialTheme.colorScheme.primary
                                 )
                             }
