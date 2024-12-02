@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.sqlite.framework)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,6 +67,7 @@ dependencies {
 
     implementation(libs.generativeai)
 
+    //implementation(libs.jetchart)
     implementation(libs.jetchart)
 
     testImplementation(libs.junit)
