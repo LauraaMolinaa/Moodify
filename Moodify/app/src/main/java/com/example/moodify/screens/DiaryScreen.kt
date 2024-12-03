@@ -227,7 +227,7 @@ fun DiaryScreenContent(
         Button(
             onClick = {
                 coroutineScope.launch {
-                    aiResponse = TestAI().toString()
+                    aiResponse = TestAI(input1, input2, input3).toString()
                 }
             }
         ) {
@@ -237,14 +237,14 @@ fun DiaryScreenContent(
     }
 }
 
-suspend fun TestAI(): String? {
+suspend fun TestAI(input1: String, input2: String, input3: String): String? {
     val generativeModel =
         GenerativeModel(
             modelName = "gemini-1.5-flash",
             apiKey = "AIzaSyCLpbLftJdeBtm26I87u8xovOTT15q07xc" ,
         )
 
-    val prompt = "one diary prompt"
+    val prompt = "Using these three gratitude entry can you give a small sentence (prompt) on what we should write about in our diary entry. The first gratitude is ${input1}, second is ${input2} and the last one is ${input3} "
     val response = generativeModel.generateContent(prompt)
     return response.text
 }
