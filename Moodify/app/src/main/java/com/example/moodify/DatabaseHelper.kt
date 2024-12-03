@@ -18,8 +18,12 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     //depressed colorId 6
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(CREATE_DB)
         db.execSQL(CREATE_STATISTICS_TABLE)
+        db.execSQL(CREATE_COLOR_TABLE)
+        db.execSQL(CREATE_GRATEFULNESS_ENTRY_TABLE)
+        db.execSQL(CREATE_GRATEFULNESS_TABLE)
+        db.execSQL(CREATE_DIARY_TABLE)
+        db.execSQL(CREATE_MOODBOARD_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldData: Int, newData: Int) {
@@ -31,10 +35,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "moodify.db"
     }
-
-    private val CREATE_DB = """
-        CREATE DATABASE Moodify
-    """
 
     private val CREATE_STATISTICS_TABLE = """
         CREATE TABLE Statistics(
