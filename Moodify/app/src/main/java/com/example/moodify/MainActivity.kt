@@ -26,7 +26,9 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val currentBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = currentBackStackEntry?.destination?.route ?: BottomNavItem.Home.route
-            val moodifyDb = MoodifyDbHelper(LocalContext.current)
+            val db = MoodifyDatabase(LocalContext.current)
+
+            db.insert_statistics(4.75, 12.25)
 
             MoodifyTheme(darkTheme = isDarkTheme) {
                 MoodifyScaffold(

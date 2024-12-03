@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 //source https://developer.android.com/training/data-storage/sqlite
 //source https://www.codersarts.com/post/integrating-sqlite-in-android-app-using-kotlin-a-step-by-step-guide
 
-class MoodifyDbHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
+class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     //what color is what number
     //perfect colorId 1
@@ -18,6 +18,7 @@ class MoodifyDbHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     //depressed colorId 6
 
     override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(CREATE_DB)
         db.execSQL(CREATE_STATISTICS_TABLE)
     }
 
@@ -30,6 +31,10 @@ class MoodifyDbHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "moodify.db"
     }
+
+    private val CREATE_DB = """
+        CREATE DATABASE Moodify
+    """
 
     private val CREATE_STATISTICS_TABLE = """
         CREATE TABLE Statistics(
