@@ -51,48 +51,6 @@ fun DiaryScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { /* TODO: Navigate to respective screen */ },
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        ) {
-            Box(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)
-                            )
-                        )
-                    )
-                    .padding(24.dp)
-                    .animateContentSize()
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Gratitude",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Start
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,6 +60,7 @@ fun DiaryScreenContent(
                 containerColor = MaterialTheme.colorScheme.surface
             )
         ) {
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -124,6 +83,14 @@ fun DiaryScreenContent(
                         .fillMaxWidth()
                         .wrapContentHeight()
                 ) {
+                    Text(
+                        text = "Gratitude",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start
+                    )
                     // First input field
                     OutlinedTextField(
                         value = input1,
