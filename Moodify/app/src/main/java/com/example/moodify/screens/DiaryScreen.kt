@@ -19,10 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.moodify.MoodifyDatabase
 import com.google.ai.client.generativeai.GenerativeModel
 
 
@@ -31,6 +33,7 @@ import kotlinx.coroutines.launch
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DiaryScreenContent(
+    db: MoodifyDatabase,
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
@@ -201,6 +204,22 @@ fun DiaryScreenContent(
             Text(text = "Give me a prompt", color = Color.Black)
         }
 
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = {
+                aiResponse = saveData {
+                    input1 = ""
+                    input2 = ""
+                    input3 = ""
+                    entry = ""
+                }.toString()
+
+            }
+        ) {
+            Text(text = "Save", color = Color.Black)
+        }
+
     }
 }
 
@@ -214,4 +233,10 @@ suspend fun TestAI(input1: String, input2: String, input3: String): String? {
     val prompt = "Using these three gratitude entry can you give a small sentence (prompt) on what we should write about in our diary entry. The first gratitude is ${input1}, second is ${input2} and the last one is ${input3} "
     val response = generativeModel.generateContent(prompt)
     return response.text
+}
+
+fun saveData(onClearInputs: () -> Unit): String {
+    //save the data before
+    onClearInputs()
+    return "Your data has been saved!"
 }

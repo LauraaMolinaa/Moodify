@@ -85,6 +85,7 @@ class MainActivity : ComponentActivity() {
 
                         composable(BottomNavItem.Diary.route) {
                             DiaryScreenContent(
+                                db = db,
                                 isDarkTheme = isDarkTheme,
                                 onToggleTheme = { isDarkTheme = !isDarkTheme }
                             )
