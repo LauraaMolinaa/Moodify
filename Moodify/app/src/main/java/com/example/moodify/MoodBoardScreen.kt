@@ -36,44 +36,53 @@ fun MoodBoardScreen(
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
-    var selectedMonth by remember { mutableStateOf(LocalDate.now().month) }
+    var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     var selectedDay by remember { mutableStateOf<LocalDate?>(null) }
-    var moodColor by remember { mutableStateOf(Color.Transparent) }
-    val daysInMonth = YearMonth.now().lengthOfMonth()
+    val today = LocalDate.now()
+    val daysInMonth = currentMonth.lengthOfMonth()
+    val firstDayOfWeek = currentMonth.atDay(1).dayOfWeek.value % 7 // Adjust for 0-indexed grid
+    val moods = remember { mutableStateMapOf<LocalDate, Color>() }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp)
     ) {
         TopBarWithMonthSelector(
-            selectedMonth = selectedMonth,
-            onPreviousMonth = { selectedMonth = selectedMonth.minus(1) },
-            onNextMonth = { selectedMonth = selectedMonth.plus(1) }
+            selectedMonth = currentMonth.month,
+            selectedYear = currentMonth.year,
+            onPreviousMonth = { currentMonth = currentMonth.minusMonths(1) },
+            onNextMonth = { currentMonth = currentMonth.plusMonths(1) }
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         CalendarGrid(
             daysInMonth = daysInMonth,
+            firstDayOfWeek = firstDayOfWeek,
             selectedDay = selectedDay,
-            onDaySelected = { selectedDay = it },
-            moodColor = moodColor
+            onDaySelected = { day ->
+                selectedDay = day
+            },
+            today = today,
+            currentMonth = currentMonth,
+            moods = moods
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-        MoodColorPicker(onColorSelected = { moodColor = it })
+        MoodColorPickerWithLabels { color ->
+            selectedDay?.let { day ->
+                moods[day] = color
+            }
+        }
     }
 }
-
-
 
 @Composable
 fun TopBarWithMonthSelector(
     selectedMonth: Month,
+    selectedYear: Int,
     onPreviousMonth: () -> Unit,
     onNextMonth: () -> Unit
 ) {
@@ -86,8 +95,8 @@ fun TopBarWithMonthSelector(
             Icon(Icons.Default.KeyboardArrowLeft, contentDescription = "Previous Month")
         }
         Text(
-            text = selectedMonth.name.capitalize(),
-            fontSize = 24.sp,
+            text = "${selectedMonth.name.capitalize()} $selectedYear",
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -101,66 +110,102 @@ fun TopBarWithMonthSelector(
 @Composable
 fun CalendarGrid(
     daysInMonth: Int,
+    firstDayOfWeek: Int,
     selectedDay: LocalDate?,
     onDaySelected: (LocalDate) -> Unit,
-    moodColor: Color
+    today: LocalDate,
+    currentMonth: YearMonth,
+    moods: Map<LocalDate, Color>
 ) {
-    val today = LocalDate.now().dayOfMonth
     LazyVerticalGrid(
         columns = GridCells.Fixed(7),
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(max = 300.dp)
+            .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(12.dp))
+            .padding(8.dp)
     ) {
-        items(daysInMonth) { day ->
-            val dayDate = LocalDate.of(LocalDate.now().year, LocalDate.now().month, day + 1)
+        items(firstDayOfWeek) {
+            Spacer(modifier = Modifier.aspectRatio(1f))
+        }
+        items(daysInMonth) { index ->
+            val day = index + 1
+            val date = currentMonth.atDay(day)
+            val moodColor = moods[date] ?: Color.Transparent
+
             Box(
                 modifier = Modifier
                     .aspectRatio(1f)
                     .padding(4.dp)
                     .background(
-                        color = if (day + 1 == today) moodColor else Color.Transparent,
+                        color = moodColor, // Only show mood color
                         shape = RoundedCornerShape(8.dp)
                     )
-                    .clickable { onDaySelected(dayDate) }
+                    .clickable { onDaySelected(date) }
                     .border(
-                        width = 2.dp,
-                        color = if (dayDate == selectedDay) MaterialTheme.colorScheme.primary else Color.Transparent,
+                        width = if (date == selectedDay) 2.dp else 1.dp,
+                        color = if (date == selectedDay) MaterialTheme.colorScheme.primary else Color.Transparent,
                         shape = RoundedCornerShape(8.dp)
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "${day + 1}",
-                    color = if (day + 1 == today) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onBackground
+                    text = day.toString(),
+                    fontWeight = if (date == today) FontWeight.Bold else FontWeight.Normal,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }
     }
 }
 
+
 @Composable
-fun MoodColorPicker(onColorSelected: (Color) -> Unit) {
-    Row(
+fun MoodColorPickerWithLabels(onColorSelected: (Color) -> Unit) {
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalAlignment = Alignment.Start
     ) {
-        val moodColors = listOf(Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Magenta)
-        moodColors.forEach { color ->
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .background(color, shape = CircleShape)
-                    .clickable { onColorSelected(color) }
-                    .border(
-                        width = 2.dp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        shape = CircleShape
-                    )
+        Text(
+            text = "Pick a Mood",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            val moodColors = listOf(
+                Color.Magenta to "Excited",
+                Color.Green to "Happy",
+                Color.Yellow to "Neutral",
+                Color.Blue to "Calm",
+                Color.Red to "Angry",
+
             )
+            moodColors.forEach { (color, label) ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.clickable { onColorSelected(color) }
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(24.dp)
+                            .background(color, shape = CircleShape)
+                            .border(1.dp, MaterialTheme.colorScheme.onBackground, CircleShape)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = label,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontSize = 14.sp
+                    )
+                }
+            }
         }
     }
 }
+
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
