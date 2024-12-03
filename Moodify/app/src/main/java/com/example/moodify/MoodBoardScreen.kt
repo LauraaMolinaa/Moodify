@@ -177,9 +177,10 @@ fun MoodColorPickerWithLabels(onColorSelected: (Color) -> Unit) {
             val moodColors = listOf(
                 Color.Magenta to "Excited",
                 Color.Green to "Happy",
-                Color.Yellow to "Neutral",
                 Color.Blue to "Calm",
+                Color.Yellow to "Neutral",
                 Color.Red to "Angry",
+                
 
             )
             moodColors.forEach { (color, label) ->
