@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
     companion object {
         // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 4
+        const val DATABASE_VERSION = 9
         const val DATABASE_NAME = "moodify.db"
     }
     //what color is what number
@@ -64,10 +64,10 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     private val CREATE_GRATEFULNESS_TABLE = """ 
         CREATE TABLE Gratefulness(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
-            date TEXT, 
-            diary_id INTEGER
-        )
+            date TEXT
+            --diary_id INTEGER,
             --FOREIGN KEY(dairy_id) REFERENCES Diary(id)
+        )
         
     """
 
@@ -75,18 +75,17 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         CREATE TABLE GratefulnessEntry(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
             description TEXT, 
-            gratefulnes_id INT
+            gratefulnes_id INT,
+            FOREIGN KEY(gratefulnes_id) REFERENCES Gratefulness(id)
         )
-            --FOREIGN KEY(gratefulnes_id) REFERENCES Gratefulness(id)
-        
     """
 
     private val CREATE_DIARY_TABLE = """ 
         CREATE TABLE Diary(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
-            description TEXT, 
-            gratefulness_id INTEGER,
-            FOREIGN KEY(gratefulness_id) REFERENCES Gratefulness(id)
+            description TEXT
+            --gratefulness_id INTEGER,
+            --FOREIGN KEY(gratefulness_id) REFERENCES Gratefulness(id)
         )
     """
 

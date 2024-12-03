@@ -48,26 +48,26 @@ class MoodifyDatabase(context: Context) {
         db.insert("GratefulnessEntry", null, values)
     }
 
-    fun insert_gratefulness(date: String, diaryId: Int) {
+    fun insert_gratefulness(date: String) {
         // get the writable database
         val db = databaseHelper.writableDatabase
 
         val values = ContentValues().apply {
             put("date", date)
-            put("dairy_id", diaryId)
+            //put("dairy_id", diaryId)
         }
 
         // insert the data into the table
         db.insert("Gratefulness", null, values)
     }
 
-    fun insert_diary(description: String, gratefulnessId: Int)
+    fun insert_diary(description: String)
     {
         val db = databaseHelper.writableDatabase
 
         val values = ContentValues().apply {
             put("description", description)
-            put("gratefulnes_id", gratefulnessId)
+            //put("gratefulnes_id", gratefulnessId)
         }
 
         // insert the data into the table
@@ -79,7 +79,7 @@ class MoodifyDatabase(context: Context) {
         val db = databaseHelper.writableDatabase
 
         val values = ContentValues().apply {
-            put("date", date.toString())
+            put("date", date)
             put("colorId", colorId)
             put("diaryId", diaryId)
         }
