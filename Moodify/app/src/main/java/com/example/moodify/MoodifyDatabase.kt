@@ -119,5 +119,38 @@ class MoodifyDatabase(context: Context) {
 
     }
 
+    fun getDiaries(): List<Diary> {
+        val db = databaseHelper.readableDatabase
+        val diaryList = mutableListOf<Diary>()
+        val cursor = db.query("Diary", null, null, null, null, null, null)
+
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val description = getString(getColumnIndexOrThrow("description"))
+                val date = getString(getColumnIndexOrThrow("date"))
+                diaryList.add(Diary(id, description, date))
+            }
+            close()
+        }
+        return diaryList
+    }
+
+    fun getStatistics(): List<Statistics> {
+        val db = databaseHelper.readableDatabase
+        val statisticsList = mutableListOf<Statistics>()
+        val cursor = db.query("Statistics", null, null, null, null, null, null)
+
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val averageMood = getDouble(getColumnIndexOrThrow("average_mood"))
+                val diaryAdherence = getDouble(getColumnIndexOrThrow("diary_adherence"))
+                statisticsList.add(Statistics(id, averageMood, diaryAdherence))
+            }
+            close()
+        }
+        return statisticsList
+    }
 
 }
