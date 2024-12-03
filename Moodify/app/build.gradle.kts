@@ -65,7 +65,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.generativeai)
-
     implementation("com.github.fracassi-marco:JetChart:1.4.1")
 
     testImplementation(libs.junit)

@@ -245,10 +245,10 @@ suspend fun TestAI(): String? {
     val generativeModel =
         GenerativeModel(
             modelName = "gemini-1.5-flash",
-            apiKey = "AIzaSyAtIdTjCKJYiSRGOvkDu1910xGwgdwUSbs" ,
+            apiKey = "AIzaSyCLpbLftJdeBtm26I87u8xovOTT15q07xc" ,
         )
 
-    val prompt = "Hello!"
+    val prompt = "one diary prompt"
     val response = generativeModel.generateContent(prompt)
     return response.text
 }
