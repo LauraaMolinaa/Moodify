@@ -26,6 +26,8 @@ class MoodifyDatabase(context: Context) {
         db.execSQL("DELETE FROM Diary")
         db.execSQL("DELETE FROM Color")
 
+        db.execSQL("DELETE FROM sqlite_sequence")
+
     }
 
     fun insert_statistics(averageMood: Double, diaryAdherence: Double) {

@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.sqlite.framework)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,7 +67,8 @@ dependencies {
     implementation(libs.generativeai)
 
     //implementation(libs.jetchart)
-    implementation(libs.jetchart)
+    //implementation(libs.jetchart)
+    implementation("com.github.fracassi-marco:JetChart:1.4.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

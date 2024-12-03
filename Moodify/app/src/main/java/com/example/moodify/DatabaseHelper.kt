@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
     companion object {
         // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 12
+        const val DATABASE_VERSION = 13
         const val DATABASE_NAME = "moodify.db"
     }
 
@@ -87,8 +87,8 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         CREATE TABLE GratefulnessEntry(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
             description TEXT, 
-            gratefulnes_id INT,
-            FOREIGN KEY(gratefulnes_id) REFERENCES Gratefulness(id)
+            gratefulness_id INT,
+            FOREIGN KEY(gratefulness_id) REFERENCES Gratefulness(id)
         )
     """
     //date format is day-month-year like DD-MM-YYYY
