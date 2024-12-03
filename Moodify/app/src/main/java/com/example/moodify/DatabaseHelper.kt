@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper
 //source https://www.codersarts.com/post/integrating-sqlite-in-android-app-using-kotlin-a-step-by-step-guide
 
 class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
-
+    companion object {
+        // If you change the database schema, you must increment the database version.
+        const val DATABASE_VERSION = 4
+        const val DATABASE_NAME = "moodify.db"
+    }
     //what color is what number
     //perfect colorId 1
     //happy colorId 2
@@ -26,14 +30,20 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.execSQL(CREATE_MOODBOARD_TABLE)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldData: Int, newData: Int) {
-        TODO("Not yet implemented")
+    override fun onOpen(db: SQLiteDatabase) {
+        super.onOpen(db)
+        db.execSQL("PRAGMA foreign_keys=ON;")
     }
 
-    companion object {
-        // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 1
-        const val DATABASE_NAME = "moodify.db"
+
+    override fun onUpgrade(db: SQLiteDatabase, oldData: Int, newData: Int) {
+        db.execSQL("DROP TABLE IF EXISTS Statistics")
+        db.execSQL("DROP TABLE IF EXISTS Color")
+        db.execSQL("DROP TABLE IF EXISTS GratefulnessEntry")
+        db.execSQL("DROP TABLE IF EXISTS Gratefulness")
+        db.execSQL("DROP TABLE IF EXISTS Diary")
+        db.execSQL("DROP TABLE IF EXISTS Moodboard")
+        onCreate(db) // Recreate tables with updated schema
     }
 
     private val CREATE_STATISTICS_TABLE = """
@@ -51,26 +61,31 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         )
     """
 
-    private val CREATE_GRATEFULNESS_ENTRY_TABLE = """ 
-        CREATE TABLE GratefulnessEntry(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,  
-            description TEXT, 
-            FOREIGN KEY(gratefulnes_id) REFERENCES Gratefulness(id)
-        )
-    """
-
     private val CREATE_GRATEFULNESS_TABLE = """ 
         CREATE TABLE Gratefulness(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
             date TEXT, 
-            FOREIGN KEY(dairy_id) REFERENCES Diary(id)
+            diary_id INTEGER
         )
+            --FOREIGN KEY(dairy_id) REFERENCES Diary(id)
+        
+    """
+
+    private val CREATE_GRATEFULNESS_ENTRY_TABLE = """ 
+        CREATE TABLE GratefulnessEntry(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,  
+            description TEXT, 
+            gratefulnes_id INT
+        )
+            --FOREIGN KEY(gratefulnes_id) REFERENCES Gratefulness(id)
+        
     """
 
     private val CREATE_DIARY_TABLE = """ 
         CREATE TABLE Diary(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
             description TEXT, 
+            gratefulness_id INTEGER,
             FOREIGN KEY(gratefulness_id) REFERENCES Gratefulness(id)
         )
     """
@@ -79,6 +94,8 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         CREATE TABLE Moodboard(
             id INTEGER PRIMARY KEY AUTOINCREMENT,  
             date TEXT, 
+            color_id INTEGER,
+            diary_id INTEGER,
             FOREIGN KEY(color_id) REFERENCES Color(id),
             FOREIGN KEY(diary_id) REFERENCES Diary(id)
         )
