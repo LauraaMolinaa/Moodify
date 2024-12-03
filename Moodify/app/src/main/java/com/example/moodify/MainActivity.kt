@@ -75,18 +75,17 @@ class MainActivity : ComponentActivity() {
         db.insert_statistics(6.0, 10.5)
         db.insert_statistics(4.7, 67.0)
 
-//        will not work because the gratefulness table has a diary FK and the diary table has a gratefulness FK
-        db.insert_diary("diary 1")
-        db.insert_diary("diary 2")
-        db.insert_diary("diary 3")
-
-        db.insert_gratefulness("03-03-2024")
-        db.insert_gratefulness("05-03-2024")
-        db.insert_gratefulness("09-03-2024")
+        db.insert_diary("diary 1", "03-03-2024")
+        db.insert_diary("diary 2", "05-03-2024")
+        db.insert_diary("diary 3", "09-03-2024")
 
         db.insert_moodboard("03-03-2024", 6, 1)
         db.insert_moodboard("05-03-2024", 1, 2)
         db.insert_moodboard("09-03-2024", 4, 3)
+
+        db.insert_gratefulness("03-03-2024", 1)
+        db.insert_gratefulness("05-03-2024", 2)
+        db.insert_gratefulness("09-03-2024", 3)
 
         db.insert_gratefulness_entry("grateful 1 of gratefulnessId 1", 1)
         db.insert_gratefulness_entry("grateful 2 of gratefulnessId 1", 1)

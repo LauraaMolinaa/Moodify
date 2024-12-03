@@ -23,12 +23,13 @@ class MoodifyDatabase(context: Context) {
         db.insert("Statistics", null, values)
     }
 
-    fun insert_color(color: String) {
+    fun insert_color(color: String, emotion: String) {
         // get the writable database
         val db = databaseHelper.writableDatabase
 
         val values = ContentValues().apply {
             put("name", color)
+            put("emotion", emotion)
         }
 
         // insert the data into the table
@@ -41,33 +42,33 @@ class MoodifyDatabase(context: Context) {
 
         val values = ContentValues().apply {
             put("description", description)
-            put("gratefulnes_id", gratefulnessId)
+            put("gratefulness_id", gratefulnessId)
         }
 
         // insert the data into the table
         db.insert("GratefulnessEntry", null, values)
     }
 
-    fun insert_gratefulness(date: String) {
+    fun insert_gratefulness(date: String, diaryId: Int) {
         // get the writable database
         val db = databaseHelper.writableDatabase
 
         val values = ContentValues().apply {
             put("date", date)
-            //put("dairy_id", diaryId)
+            put("diary_id", diaryId)
         }
 
         // insert the data into the table
         db.insert("Gratefulness", null, values)
     }
 
-    fun insert_diary(description: String)
+    fun insert_diary(description: String, date: String)
     {
         val db = databaseHelper.writableDatabase
 
         val values = ContentValues().apply {
             put("description", description)
-            //put("gratefulnes_id", gratefulnessId)
+            put("date", date)
         }
 
         // insert the data into the table
@@ -80,8 +81,8 @@ class MoodifyDatabase(context: Context) {
 
         val values = ContentValues().apply {
             put("date", date)
-            put("colorId", colorId)
-            put("diaryId", diaryId)
+            put("color_id", colorId)
+            put("diary_id", diaryId)
         }
 
         // insert the data into the table
@@ -89,12 +90,12 @@ class MoodifyDatabase(context: Context) {
     }
 
     fun populateColorsTable() {
-        insert_color("perfect") //perfect colorId 1
-        insert_color("happy") //happy colorId 2
-        insert_color("okay") //okay colorId 3
-        insert_color("sad") //sad colorId 4
-        insert_color("anxious") //anxious colorId 5
-        insert_color("depressed") //depressed colorId 6
+        insert_color("purple","perfect") //perfect colorId 1
+        insert_color("yellow", "happy") //happy colorId 2
+        insert_color("green", "okay") //okay colorId 3
+        insert_color("blue","sad") //sad colorId 4
+        insert_color("white","anxious") //anxious colorId 5
+        insert_color("red","depressed") //depressed colorId 6
 
     }
 
