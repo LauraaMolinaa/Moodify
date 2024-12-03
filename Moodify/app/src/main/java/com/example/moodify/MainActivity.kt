@@ -4,7 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -14,13 +14,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.moodify.screens.DiaryScreenContent
+import com.example.moodify.screens.HomeScreenContent
+import com.example.moodify.screens.MoodBoardScreen
+import com.example.moodify.screens.ResourceScreen
+import com.example.moodify.screens.StatScreen
 import com.example.moodify.ui.theme.MoodifyTheme
-import java.sql.Date
-import java.time.LocalDate
 
 
 class MainActivity : ComponentActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -30,14 +32,22 @@ class MainActivity : ComponentActivity() {
             val currentRoute = currentBackStackEntry?.destination?.route ?: BottomNavItem.Home.route
             val db = MoodifyDatabase(LocalContext.current)
 
-            db.reset_db_data()
-
-            if(!db.isInitialized)
-            {
-                populateDbDummyData(db)
-                db.isInitialized = true
+            // Initialize the database with dummy data once
+            LaunchedEffect(Unit) {
+                if (!db.isInitialized) {
+                    db.reset_db_data()
+                    populateDbDummyData(db)
+                    db.isInitialized = true
+                }
             }
 
+            // Fetch data for HomeScreen
+            val diaryEntries = db.getDiaries()
+            val statistics = db.getStatistics()
+            val lastDiaryEntry = diaryEntries.maxByOrNull { it.id }
+            val totalDiaryEntries = diaryEntries.size
+            val averageMood = if (statistics.isNotEmpty()) statistics.map { it.averageMood }.average() else 0.0
+            val progress = statistics.lastOrNull()?.diaryAdherence ?: 0.0
 
             MoodifyTheme(darkTheme = isDarkTheme) {
                 MoodifyScaffold(
@@ -56,14 +66,31 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = BottomNavItem.Home.route
                     ) {
-                        composable(BottomNavItem.Home.route) { HomeScreenContent() }
-                        composable(BottomNavItem.MoodBoard.route) { MoodBoardScreenContent(isDarkTheme, onToggleTheme = { isDarkTheme = !isDarkTheme }) }
+                        composable(BottomNavItem.Home.route) {
+                            HomeScreenContent(
+                                lastDiaryEntryDate = lastDiaryEntry?.date ?: "No entries",
+                                totalDiaryEntries = totalDiaryEntries,
+                                averageMood = averageMood,
+                                progress = progress,
+                                isDarkTheme = isDarkTheme,
+                                onToggleTheme = { isDarkTheme = !isDarkTheme }
+                            )
+                        }
+                        composable(BottomNavItem.MoodBoard.route) {
+                            MoodBoardScreen(
+                                isDarkTheme = isDarkTheme,
+                                onToggleTheme = { isDarkTheme = !isDarkTheme }
+                            )
+                        }
 
-                        composable(BottomNavItem.Diary.route) { DiaryScreenContent(isDarkTheme, onToggleTheme = { isDarkTheme = !isDarkTheme }) }
-
+                        composable(BottomNavItem.Diary.route) {
+                            DiaryScreenContent(
+                                isDarkTheme = isDarkTheme,
+                                onToggleTheme = { isDarkTheme = !isDarkTheme }
+                            )
+                        }
                         composable(BottomNavItem.Stats.route) { StatScreen() }
                         composable(BottomNavItem.Resources.route) { ResourceScreen() }
-                        // TODO: Add more routes as the screens are created
                     }
                 }
             }
