@@ -20,21 +20,27 @@ With a calming design, Moodify offers a comforting space to promote emotional we
 Our app will have the following features:  
 1. A main page with a button for each screen.
 
-2. The mood board where the user can enter a color representing their mood given a color palette. 
+2. The mood board where the user can enter a color representing their mood given a color palette. The user can choose:
+   - purple for feeling perfect
+   - yellow for feeling happy
+   - green for feeling okay
+   - blue for feeling sad
+   - white for feeling anxious
+   - red for feeling depressed
 
-3. Resources page with access to mental health support options.
+4. Resources page with access to mental health support options.
 
-4. A diary coupled with three bullet points where you have to enter three things you are grateful for. 
+5. A diary coupled with three bullet points where you have to enter three things you are grateful for. 
 
-5. A statics page where the user can see:
+6. A statics page where the user can see:
     - their adherence to the app
     - their general mood of the month
     - a chart showing the moods of the month
     - a personalized message according to the user's mood of the month
 
-6. A local database where the user's mood, diary entries, and bullet points will be saved.
+7. A local database where the user's mood, diary entries, and bullet points will be saved.
 
-7. An AI feature that will help the user come up with diary prompts.
+8. An AI feature that will help the user come up with diary prompts.
 ## General look of the app
 ![alt text](<Screenshot 2024-11-11 at 9.49.43 AM.png>)
 
