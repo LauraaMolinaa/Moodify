@@ -85,7 +85,6 @@ class MainActivity : ComponentActivity() {
 
                         composable(BottomNavItem.Diary.route) {
                             DiaryScreenContent(
-                                db = db,
                                 isDarkTheme = isDarkTheme,
                                 onToggleTheme = { isDarkTheme = !isDarkTheme }
                             )
@@ -117,7 +116,7 @@ class MainActivity : ComponentActivity() {
         db.insert_moodboard("03-03-2024", 6, 1)
         db.insert_moodboard("05-03-2024", 1, 2)
         db.insert_moodboard("09-03-2024", 4, 3)
-
+        /*
         db.insert_gratefulness("03-03-2024", 1)
         db.insert_gratefulness("05-03-2024", 2)
         db.insert_gratefulness("09-03-2024", 3)
@@ -133,6 +132,6 @@ class MainActivity : ComponentActivity() {
         db.insert_gratefulness_entry("grateful 1 of gratefulnessId 3", 3)
         db.insert_gratefulness_entry("grateful 2 of gratefulnessId 3", 3)
         db.insert_gratefulness_entry("grateful 3 of gratefulnessId 3", 3)
-
+         */
     }
 }

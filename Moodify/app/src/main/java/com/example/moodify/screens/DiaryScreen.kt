@@ -1,4 +1,7 @@
 package com.example.moodify.screens
+
+
+import android.content.ContentValues
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
@@ -24,25 +27,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.moodify.DatabaseHelper
 import com.example.moodify.MoodifyDatabase
 import com.google.ai.client.generativeai.GenerativeModel
-
-
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DiaryScreenContent(
-    db: MoodifyDatabase,
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
-
+    val moodifyDatabase = MoodifyDatabase(LocalContext.current)
     var input1 by remember { mutableStateOf("") }
     var input2 by remember { mutableStateOf("") }
     var input3 by remember { mutableStateOf("") }
     var entry by remember { mutableStateOf("") }
     var aiResponse by remember { mutableStateOf("") }
+    var index by remember { mutableStateOf(0) }
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -194,31 +198,50 @@ fun DiaryScreenContent(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(
-            onClick = {
-                coroutineScope.launch {
-                    aiResponse = TestAI(input1, input2, input3).toString()
-                }
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween, // Ensures buttons are spaced out
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Give me a prompt", color = Color.Black)
+            Button(
+                onClick = {
+                    aiResponse = saveData(
+                        db = moodifyDatabase,
+                        input1 = input1,
+                        input2 = input2,
+                        input3 = input3,
+                        entry = entry,
+                        index = index,
+                    ) {
+                        input1 = ""
+                        input2 = ""
+                        input3 = ""
+                        entry = ""
+                    }
+
+                    index = index + 3
+                },
+                modifier = Modifier.weight(1f) // Ensures both buttons have equal width
+            ) {
+                Text(text = "Save", color = Color.Black)
+            }
+
+            Spacer(modifier = Modifier.width(16.dp)) // Adds space between the buttons
+
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        aiResponse = TestAI(input1, input2, input3).toString()
+                    }
+                },
+                modifier = Modifier.weight(1f) // Ensures both buttons have equal width
+            ) {
+                Text(text = "Give me a prompt", color = Color.Black)
+            }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Button(
-            onClick = {
-                aiResponse = saveData {
-                    input1 = ""
-                    input2 = ""
-                    input3 = ""
-                    entry = ""
-                }.toString()
-
-            }
-        ) {
-            Text(text = "Save", color = Color.Black)
-        }
 
     }
 }
@@ -234,9 +257,34 @@ suspend fun TestAI(input1: String, input2: String, input3: String): String? {
     val response = generativeModel.generateContent(prompt)
     return response.text
 }
+fun saveData(
+    db: MoodifyDatabase,
+    input1: String,
+    input2: String,
+    input3: String,
+    entry: String,
+    index: Int,
+    onClearInputs: () -> Unit
+): String {
 
-fun saveData(onClearInputs: () -> Unit): String {
-    //save the data before
-    onClearInputs()
-    return "Your data has been saved!"
+    //getting today's date
+    val date = LocalDateTime.now().toString()
+
+    try {
+        var diaryId = db.insert_diary(entry, date)
+
+        var gratefulnessId = db.insert_gratefulness(date,diaryId.toInt())
+
+        //var diaryId = db.getDiaries()
+        db.insert_gratefulness_entry(input1, gratefulnessId.toInt())
+        db.insert_gratefulness_entry(input2, gratefulnessId.toInt())
+        db.insert_gratefulness_entry(input3, gratefulnessId.toInt())
+
+        // Clear inputs after saving
+        onClearInputs()
+        return "Your data has been saved!"
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return "Failed to save data: ${e.message}"
+    }
 }

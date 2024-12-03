@@ -69,7 +69,7 @@ class MoodifyDatabase(context: Context) {
         db.insert("GratefulnessEntry", null, values)
     }
 
-    fun insert_gratefulness(date: String, diaryId: Int) {
+    fun insert_gratefulness(date: String, diaryId: Int):Long {
         // get the writable database
         val db = databaseHelper.writableDatabase
 
@@ -79,10 +79,10 @@ class MoodifyDatabase(context: Context) {
         }
 
         // insert the data into the table
-        db.insert("Gratefulness", null, values)
+        return db.insert("Gratefulness", null, values)
     }
 
-    fun insert_diary(description: String, date: String)
+    fun insert_diary(description: String, date: String): Long
     {
         val db = databaseHelper.writableDatabase
 
@@ -92,7 +92,7 @@ class MoodifyDatabase(context: Context) {
         }
 
         // insert the data into the table
-        db.insert("Diary", null, values)
+        return db.insert("Diary", null, values)
     }
 
     fun insert_moodboard(date: String, colorId: Int, diaryId: Int)
