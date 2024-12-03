@@ -30,7 +30,14 @@ class MainActivity : ComponentActivity() {
             val currentRoute = currentBackStackEntry?.destination?.route ?: BottomNavItem.Home.route
             val db = MoodifyDatabase(LocalContext.current)
 
-            populateDbDummyData(db)
+            db.reset_db_data()
+
+            if(!db.isInitialized)
+            {
+                populateDbDummyData(db)
+                db.isInitialized = true
+            }
+
 
             MoodifyTheme(darkTheme = isDarkTheme) {
                 MoodifyScaffold(

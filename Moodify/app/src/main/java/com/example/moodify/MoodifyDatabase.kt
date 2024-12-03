@@ -9,6 +9,24 @@ import java.util.Date
 class MoodifyDatabase(context: Context) {
 
     private val databaseHelper = DatabaseHelper(context)
+    private var _isInitialized: Boolean = false
+
+    var isInitialized: Boolean
+        get() = _isInitialized
+        set(value) { _isInitialized = value }
+
+    fun reset_db_data()
+    {
+        val db = databaseHelper.writableDatabase
+
+        db.execSQL("DELETE FROM Statistics")
+        db.execSQL("DELETE FROM GratefulnessEntry")
+        db.execSQL("DELETE FROM Gratefulness")
+        db.execSQL("DELETE FROM Moodboard")
+        db.execSQL("DELETE FROM Diary")
+        db.execSQL("DELETE FROM Color")
+
+    }
 
     fun insert_statistics(averageMood: Double, diaryAdherence: Double) {
         // get the writable database

@@ -21,7 +21,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.execSQL(CREATE_MOODBOARD_TABLE)
         db.execSQL(CREATE_GRATEFULNESS_TABLE)
         db.execSQL(CREATE_GRATEFULNESS_ENTRY_TABLE)
-
     }
 
     override fun onOpen(db: SQLiteDatabase) {
