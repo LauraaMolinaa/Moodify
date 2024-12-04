@@ -173,13 +173,11 @@ fun MoodColorPickerWithLabels(onColorSelected: (Color) -> Unit) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             val moodColors = listOf(
-                Color.Magenta to "Excited",
-                Color.Green to "Happy",
-                Color.Blue to "Calm",
-                Color.Yellow to "Neutral",
-                Color.Red to "Angry",
-                
-
+                Color.Magenta to "Perfect",
+                Color.Yellow to "Happy",
+                Color.Green to "Okay",
+                Color.Blue to "Sad",
+                Color.Red to "Depressed"
             )
             moodColors.forEach { (color, label) ->
                 Row(

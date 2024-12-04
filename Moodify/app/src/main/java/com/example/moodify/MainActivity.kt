@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                                 onToggleTheme = { isDarkTheme = !isDarkTheme }
                             )
                         }
-                        composable(BottomNavItem.Stats.route) { StatScreen() }
+                        composable(BottomNavItem.Stats.route) { StatScreen(db) }
                         composable(BottomNavItem.Resources.route) { ResourceScreen() }
                     }
                 }
@@ -112,10 +112,14 @@ class MainActivity : ComponentActivity() {
         db.insert_diary("diary 1", "03-03-2024")
         db.insert_diary("diary 2", "05-03-2024")
         db.insert_diary("diary 3", "09-03-2024")
+        db.insert_diary("diary 4", "13-03-2024")
+        db.insert_diary("diary 5", "20-03-2024")
 
         db.insert_moodboard("03-03-2024", 6, 1)
         db.insert_moodboard("05-03-2024", 1, 2)
         db.insert_moodboard("09-03-2024", 4, 3)
+        db.insert_moodboard("13-03-2024", 2, 4)
+        db.insert_moodboard("20-03-2024", 2, 5)
         /*
         db.insert_gratefulness("03-03-2024", 1)
         db.insert_gratefulness("05-03-2024", 2)
@@ -132,6 +136,14 @@ class MainActivity : ComponentActivity() {
         db.insert_gratefulness_entry("grateful 1 of gratefulnessId 3", 3)
         db.insert_gratefulness_entry("grateful 2 of gratefulnessId 3", 3)
         db.insert_gratefulness_entry("grateful 3 of gratefulnessId 3", 3)
+
+        db.insert_gratefulness_entry("grateful 1 of gratefulnessId 4", 4)
+        db.insert_gratefulness_entry("grateful 2 of gratefulnessId 4", 4)
+        db.insert_gratefulness_entry("grateful 3 of gratefulnessId 4", 4)
+
+        db.insert_gratefulness_entry("grateful 1 of gratefulnessId 5", 5)
+        db.insert_gratefulness_entry("grateful 2 of gratefulnessId 5", 5)
+        db.insert_gratefulness_entry("grateful 3 of gratefulnessId 5", 5)
          */
     }
 }

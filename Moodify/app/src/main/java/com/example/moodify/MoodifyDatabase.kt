@@ -110,7 +110,7 @@ class MoodifyDatabase(context: Context) {
     }
 
     fun populateColorsTable() {
-        insert_color("purple","perfect") //perfect colorId 1
+        insert_color("magenta","perfect") //perfect colorId 1
         insert_color("yellow", "happy") //happy colorId 2
         insert_color("green", "okay") //okay colorId 3
         insert_color("blue","sad") //sad colorId 4
@@ -153,4 +153,46 @@ class MoodifyDatabase(context: Context) {
         return statisticsList
     }
 
+    /**
+     * Retrieves all the entries from the Moodboard table in the database and converts
+     * them into a list of Moodboard objects
+     */
+    fun getMoodboardData(): List<Moodboard> {
+        val db = databaseHelper.readableDatabase
+        val moodboardList = mutableListOf<Moodboard>()
+        val cursor = db.query("Moodboard", null, null, null, null, null, null)
+
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val date = getString(getColumnIndexOrThrow("date"))
+                val colorId = getInt(getColumnIndexOrThrow("color_id"))
+                val diaryId = getInt(getColumnIndexOrThrow("diary_id"))
+                moodboardList.add(Moodboard(id, date, colorId, diaryId))
+            }
+            close()
+        }
+        return moodboardList
+    }
+
+    /**
+     * Retrieves all the color definitions from the Color table, mapping each color to its
+     * associated ID and emotion
+     */
+    fun getColors(): List<Color> {
+        val db = databaseHelper.readableDatabase
+        val colorList = mutableListOf<Color>()
+        val cursor = db.query("Color", null, null, null, null, null, null)
+
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val name = getString(getColumnIndexOrThrow("name"))
+                val emotion = getString(getColumnIndexOrThrow("emotion"))
+                colorList.add(Color(id, name, emotion))
+            }
+            close()
+        }
+        return colorList
+    }
 }
