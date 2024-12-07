@@ -1,5 +1,6 @@
 package com.example.moodify
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,6 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -20,14 +23,35 @@ import com.example.moodify.screens.HomeScreenContent
 import com.example.moodify.screens.MoodBoardScreen
 import com.example.moodify.screens.ResourceScreen
 import com.example.moodify.screens.StatScreen
+import com.example.moodify.ui.theme.AppPreferenceRepo
 import com.example.moodify.ui.theme.MoodifyTheme
+import android.content.Context
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
+const val MOODIFY_DATASTORE ="moodify_datastore"
+val Context.dataStore: DataStore<androidx.datastore.preferences.core.Preferences> by preferencesDataStore(
+    MOODIFY_DATASTORE
+)
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val context = LocalContext.current
+            val ds = context.dataStore
+            val dataStoreManager = AppPreferenceRepo(ds)
             var isDarkTheme by rememberSaveable { mutableStateOf(false) }
+
+            lifecycleScope.launch {
+                val themeTemp:Boolean = dataStoreManager.getDarkTheme(context)
+                println(themeTemp)
+                isDarkTheme = themeTemp
+            }
+
             val navController = rememberNavController()
             val currentBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = currentBackStackEntry?.destination?.route ?: BottomNavItem.Home.route
@@ -54,7 +78,12 @@ class MainActivity : ComponentActivity() {
                 MoodifyScaffold(
                     title = "Moodify",
                     isDarkTheme = isDarkTheme,
-                    onToggleTheme = { isDarkTheme = !isDarkTheme },
+                    onToggleTheme = {
+                        isDarkTheme = !isDarkTheme
+                        lifecycleScope.launch {
+                            dataStoreManager.saveToDataStore(isDarkTheme)
+                        }
+                    },
                     selectedScreen = currentRoute,
                     onScreenSelected = { route ->
                         navController.navigate(route) {
