@@ -12,31 +12,44 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.moodify.MoodifyDatabase
 import io.jetchart.pie.PieChart
 import io.jetchart.pie.Pies
 import io.jetchart.pie.Slice
 import io.jetchart.pie.renderer.FilledSliceDrawer
+import java.time.LocalDate
+import java.time.YearMonth
 
 @Composable
 fun StatScreen(db: MoodifyDatabase) {
 
     // all mood entries from the Moodboard table
-    val moodEntries = db.getMoodboardData()
+    // val moodEntries = db.getMoodboardData()
 
-    // determine the total number of mood entries
-    val totalEntries = moodEntries.size
+    // state to track the selected month and year
+    var selectedMonthYear by remember { mutableStateOf(YearMonth.now()) }
 
-    // calculate the frequency of each colorId in the mood entries
-    val moodFrequencies = moodEntries.groupingBy { it.colorId }.eachCount()
+    // filter mood entries by selected month
+    val moodEntriesForMonth = db.getMoodboardData().filter { moodboard ->
+        val entryDate = LocalDate.parse(moodboard.date, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        entryDate.monthValue == selectedMonthYear.monthValue && entryDate.year == selectedMonthYear.year
+    }
+
+    // determine the total number of mood entries for the selected month
+    val totalEntries = moodEntriesForMonth.size
+
+    // calculate the frequency of each colorId in the mood entries for the selected month
+    val moodFrequencies = moodEntriesForMonth.groupingBy { it.colorId }.eachCount()
     // retrieve all colors and their associated emotions from the Color table
     val moodColors = db.getColors()
 
@@ -60,6 +73,16 @@ fun StatScreen(db: MoodifyDatabase) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
+
+        TopBarWithMonthSelector(
+            selectedMonth = selectedMonthYear.month,
+            selectedYear = selectedMonthYear.year,
+            onPreviousMonth = { selectedMonthYear = selectedMonthYear.minusMonths(1) },
+            onNextMonth = { selectedMonthYear = selectedMonthYear.plusMonths(1) }
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         if (slicesWithDescriptions.isNotEmpty()) {
             PieChart(
                 pies = Pies(slicesWithDescriptions.map { it.first }),
@@ -71,7 +94,8 @@ fun StatScreen(db: MoodifyDatabase) {
             Spacer(modifier = Modifier.height(16.dp))
             Legend(slicesWithDescriptions)
         } else {
-            Text("No data available for this month.")
+            // display a message if there's no data for the selected month
+            Text("No data available for ${selectedMonthYear.month.name.capitalize()} ${selectedMonthYear.year}")
         }
     }
 }
