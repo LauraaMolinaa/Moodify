@@ -16,6 +16,7 @@ class AppPreferenceRepo(private val dataStore: DataStore<androidx.datastore.pref
         val IS_DARK_THEME = booleanPreferencesKey("is_dark_theme")
     }
 
+    // source https://developer.android.com/topic/libraries/architecture/datastore
     suspend fun getDarkTheme(context: Context): Boolean {
         val darkTheme: Flow<Boolean> = context.dataStore.data
             .map { preferences ->
