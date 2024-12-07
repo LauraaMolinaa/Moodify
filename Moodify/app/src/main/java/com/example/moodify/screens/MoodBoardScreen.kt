@@ -1,7 +1,6 @@
 package com.example.moodify.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,27 +18,64 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.moodify.ui.theme.MoodifyTheme
+import androidx.navigation.NavController
+import com.example.moodify.ColorRepository
+import com.example.moodify.DiaryRepository
+import com.example.moodify.MoodboardRepository
 import java.time.LocalDate
 import java.time.Month
 import java.time.YearMonth
+import androidx.compose.ui.text.style.TextAlign
+import com.example.moodify.BottomNavItem
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 
 
-@RequiresApi(Build.VERSION_CODES.O)
+
+
+fun mapColorNameToComposeColor(name: String): Color {
+    return when (name.lowercase()) {
+        "magenta" -> Color.Magenta
+        "yellow" -> Color.Yellow
+        "green" -> Color.Green
+        "blue" -> Color.Blue
+        "white" -> Color.White
+        "red" -> Color.Red
+        else -> Color.Transparent
+    }
+}
+
 @Composable
 fun MoodBoardScreen(
     isDarkTheme: Boolean,
-    onToggleTheme: () -> Unit
+    onToggleTheme: () -> Unit,
+    moodboardRepository: MoodboardRepository,
+    colorRepository: ColorRepository,
+    diaryRepository: DiaryRepository,
+    navController: NavController
 ) {
     var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     var selectedDay by remember { mutableStateOf<LocalDate?>(null) }
+    var searchQuery by remember { mutableStateOf("") }
     val today = LocalDate.now()
     val daysInMonth = currentMonth.lengthOfMonth()
     val firstDayOfWeek = currentMonth.atDay(1).dayOfWeek.value % 7 // Adjust for 0-indexed grid
     val moods = remember { mutableStateMapOf<LocalDate, Color>() }
+    val diaryEntries by remember { mutableStateOf(diaryRepository.getAllDiaries()) }
+
+    LaunchedEffect(currentMonth) {
+        val moodboards = moodboardRepository.getAllMoodboards()
+        val colors = colorRepository.getAllColors().associateBy { it.id } // Map colorId to Color object
+
+        moods.clear()
+        moodboards.forEach { moodboard ->
+            val date = LocalDate.parse(moodboard.date, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+            val color = colors[moodboard.colorId]?.let { mapColorNameToComposeColor(it.name) } ?: Color.Transparent
+            moods[date] = color
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -55,27 +91,96 @@ fun MoodBoardScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Calendar Grid
         CalendarGrid(
             daysInMonth = daysInMonth,
             firstDayOfWeek = firstDayOfWeek,
             selectedDay = selectedDay,
-            onDaySelected = { day ->
-                selectedDay = day
+            onDaySelected = { date -> selectedDay = date },
+            onDayDoubleClicked = { date ->
+                val formattedDate = date.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                val diaryEntry = diaryEntries.find { it.date == formattedDate }
+                val route = if (diaryEntry != null) {
+                    "${BottomNavItem.Diary.route}?date=$formattedDate&entry=${diaryEntry.description}"
+                } else {
+                    "${BottomNavItem.Diary.route}?date=$formattedDate"
+                }
+                navController.navigate(route)
             },
             today = today,
             currentMonth = currentMonth,
-            moods = moods
+            moods = moods,
+            moodboardRepository = moodboardRepository,
+            colorRepository = colorRepository,
+            diaryRepository = diaryRepository,
+            onMoodUpdated = { date, color ->
+                moods[date] = color // Update the UI after database change
+            }
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         MoodColorPickerWithLabels { color ->
             selectedDay?.let { day ->
-                moods[day] = color
+                val colorId = colorRepository.getAllColors()
+                    .find { mapColorNameToComposeColor(it.name) == color }?.id
+                if (colorId != null) {
+                    val date = day.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    val diaryId = diaryRepository.getAllDiaries().find { it.date == date }?.id
+                    moodboardRepository.insertOrUpdateMoodboard(date, colorId, diaryId)
+                    moods[day] = color // Update UI immediately
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Searchable List of Diary Entries
+        TextField(
+            value = searchQuery,
+            onValueChange = { searchQuery = it },
+            label = { Text("Search Diary Entries") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+            val filteredEntries = diaryEntries.filter { entry ->
+                entry.description.contains(searchQuery, ignoreCase = true) ||
+                        entry.date.contains(searchQuery, ignoreCase = true)
+            }
+            items(filteredEntries) { entry ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            val route = "${BottomNavItem.Diary.route}?date=${entry.date}&entry=${entry.description}"
+                            navController.navigate(route)
+                        }
+                        .padding(vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = entry.date,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Text(
+                        text = entry.description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(2f)
+                    )
+                }
+                Divider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
             }
         }
     }
 }
+
+
+
+
 
 @Composable
 fun TopBarWithMonthSelector(
@@ -104,57 +209,119 @@ fun TopBarWithMonthSelector(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarGrid(
     daysInMonth: Int,
     firstDayOfWeek: Int,
     selectedDay: LocalDate?,
     onDaySelected: (LocalDate) -> Unit,
+    onDayDoubleClicked: (LocalDate) -> Unit,
     today: LocalDate,
     currentMonth: YearMonth,
-    moods: Map<LocalDate, Color>
+    moods: Map<LocalDate, Color>,
+    moodboardRepository: MoodboardRepository,
+    colorRepository: ColorRepository,
+    diaryRepository: DiaryRepository,
+    onMoodUpdated: (LocalDate, Color) -> Unit,
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(7),
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(12.dp))
-            .padding(8.dp)
-    ) {
-        items(firstDayOfWeek) {
-            Spacer(modifier = Modifier.aspectRatio(1f))
-        }
-        items(daysInMonth) { index ->
-            val day = index + 1
-            val date = currentMonth.atDay(day)
-            val moodColor = moods[date] ?: Color.Transparent
+    val clickTimestamps = remember { mutableStateMapOf<LocalDate, Long>() }
+    val doubleClickThreshold = 300
+    val diaryDates = remember {
+        diaryRepository.getAllDiaries()
+            .mapNotNull {
+                try {
+                    parseDate(it.date)
+                } catch (e: Exception) {
+                    null
+                }
+            }.toSet()
+    }
 
-            Box(
-                modifier = Modifier
-                    .aspectRatio(1f)
-                    .padding(4.dp)
-                    .background(
-                        color = moodColor, // Only show mood color
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .clickable { onDaySelected(date) }
-                    .border(
-                        width = if (date == selectedDay) 2.dp else 1.dp,
-                        color = if (date == selectedDay) MaterialTheme.colorScheme.primary else Color.Transparent,
-                        shape = RoundedCornerShape(8.dp)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        // Day labels (e.g., Mon, Tue, Wed)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun").forEach { label ->
                 Text(
-                    text = day.toString(),
-                    fontWeight = if (date == today) FontWeight.Bold else FontWeight.Normal,
-                    color = MaterialTheme.colorScheme.onBackground
+                    text = label,
+                    modifier = Modifier.weight(1f),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary
                 )
+            }
+        }
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(7),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(12.dp))
+                .padding(8.dp)
+        ) {
+            // Empty cells for the first row before the first day of the month
+            items(firstDayOfWeek) {
+                Spacer(modifier = Modifier.aspectRatio(1f))
+            }
+
+            // Calendar days
+            items(daysInMonth) { index ->
+                val day = index + 1
+                val date = currentMonth.atDay(day)
+                val hasDiaryEntry = diaryDates.contains(date)
+                val moodColor = moods[date] ?: Color.Transparent
+
+                Box(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .padding(4.dp)
+                        .background(
+                            color = moodColor,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .clickable {
+                            val currentTime = System.currentTimeMillis()
+                            val lastClickTime = clickTimestamps[date] ?: 0L
+
+                            if (currentTime - lastClickTime <= doubleClickThreshold) {
+                                onDayDoubleClicked(date)
+                            } else {
+                                onDaySelected(date)
+                            }
+                            clickTimestamps[date] = currentTime
+                        }
+                        .border(
+                            width = if (date == selectedDay) 2.dp else 1.dp,
+                            color = if (date == selectedDay) MaterialTheme.colorScheme.primary else Color.Transparent,
+                            shape = RoundedCornerShape(8.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = day.toString(),
+                            fontWeight = if (date == today) FontWeight.Bold else FontWeight.Normal,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                        if (hasDiaryEntry) {
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Box(
+                                modifier = Modifier
+                                    .size(6.dp)
+                                    .background(Color.Red, shape = CircleShape)
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
+
+
 
 
 @Composable
@@ -163,11 +330,6 @@ fun MoodColorPickerWithLabels(onColorSelected: (Color) -> Unit) {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start
     ) {
-        Text(
-            text = "Pick a Mood",
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -202,18 +364,30 @@ fun MoodColorPickerWithLabels(onColorSelected: (Color) -> Unit) {
     }
 }
 
-
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-fun MoodPreview() {
-    MoodifyTheme {
-        MoodBoardScreen(
-            isDarkTheme = false,
-            onToggleTheme = {}
-        )
+fun parseDate(dateString: String): LocalDate {
+    return try {
+        // Try to parse ISO format (e.g., 2024-12-04T14:10:48.260483)
+        LocalDate.parse(dateString.substringBefore("T"))
+    } catch (e: Exception) {
+        try {
+            // Try to parse MM/dd/yyyy format
+            LocalDate.parse(
+                dateString,
+                java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy")
+            )
+        } catch (e: Exception) {
+            try {
+                // Try to parse dd/MM/yyyy format
+                LocalDate.parse(
+                    dateString,
+                    java.time.format.DateTimeFormatter.ofPattern("dd/mm/yyyy")
+                )
+            } catch (e: Exception) {
+                throw IllegalArgumentException("Unsupported date format: $dateString")
+            }
+        }
     }
 }
+
 
 

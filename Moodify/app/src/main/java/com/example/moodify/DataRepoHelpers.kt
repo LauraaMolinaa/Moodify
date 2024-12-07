@@ -1,5 +1,7 @@
 package com.example.moodify
 
+import android.content.ContentValues
+
 class StatisticsRepository(private val databaseHelper: DatabaseHelper) {
 
     fun getAllStatistics(): List<Statistics> {
@@ -81,7 +83,38 @@ class MoodboardRepository(private val databaseHelper: DatabaseHelper) {
         }
         return moodboardList
     }
+
+    fun insertOrUpdateMoodboard(date: String, colorId: Int, diaryId: Int?) {
+        val db = databaseHelper.writableDatabase
+
+        // Check if a moodboard entry already exists for the given date
+        val cursor = db.rawQuery("SELECT id FROM Moodboard WHERE date = ?", arrayOf(date))
+
+        val values = ContentValues().apply {
+            put("date", date)
+            put("color_id", colorId)
+            if (diaryId != null) {
+                put("diary_id", diaryId)
+            } else {
+                putNull("diary_id")
+            }
+        }
+
+        if (cursor.moveToFirst()) {
+            // Update existing entry
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            db.update("Moodboard", values, "id = ?", arrayOf(id.toString()))
+            println("Moodboard updated for date: $date with colorId: $colorId and diaryId: $diaryId")
+        } else {
+            // Insert new entry
+            db.insert("Moodboard", null, values)
+            println("Moodboard inserted for date: $date with colorId: $colorId and diaryId: $diaryId")
+        }
+
+        cursor.close()
+    }
 }
+
 
 
 class GratefulnessRepository(private val databaseHelper: DatabaseHelper) {

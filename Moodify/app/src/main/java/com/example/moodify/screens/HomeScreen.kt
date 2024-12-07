@@ -15,8 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.moodify.MoodifyScaffold
-import com.example.moodify.ui.theme.MoodifyTheme
+
 
 @Composable
 fun HomeScreenContent(
@@ -118,20 +117,5 @@ fun MainButtonsWithDynamicData(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LightModePreview() {
-    MoodifyTheme {
-        HomeScreenContent(
-            lastDiaryEntryDate = "03-03-2024",
-            totalDiaryEntries = 3,
-            averageMood = 4.7,
-            progress = 67.0,
-            isDarkTheme = false,
-            onToggleTheme = {}
-        )
     }
 }

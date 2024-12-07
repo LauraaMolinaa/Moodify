@@ -33,12 +33,12 @@ import com.google.ai.client.generativeai.GenerativeModel
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DiaryScreenContent(
     isDarkTheme: Boolean,
-    onToggleTheme: () -> Unit
+    onToggleTheme: () -> Unit,
+    date: String = "",
+    entry: String = ""
 ) {
     val moodifyDatabase = MoodifyDatabase(LocalContext.current)
     var input1 by remember { mutableStateOf("") }
@@ -60,8 +60,7 @@ fun DiaryScreenContent(
 
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .clickable { /* TODO: Navigate to screen */ },
+                .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surface
@@ -124,8 +123,7 @@ fun DiaryScreenContent(
 
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .clickable { /* TODO: Navigate to screen */ },
+                .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surface
@@ -174,8 +172,7 @@ fun DiaryScreenContent(
 
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .clickable { /* TODO: Navigate to respective screen */ },
+                .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surface

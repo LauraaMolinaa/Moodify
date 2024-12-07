@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.moodify.screens.DiaryScreenContent
 import com.example.moodify.screens.HomeScreenContent
 import com.example.moodify.screens.MoodBoardScreen
@@ -35,8 +36,8 @@ class MainActivity : ComponentActivity() {
             // Initialize the database with dummy data once
             LaunchedEffect(Unit) {
                 if (!db.isInitialized) {
-                    db.reset_db_data()
-                    populateDbDummyData(db)
+//                    db.reset_db_data()
+//                    populateDbDummyData(db)
                     db.isInitialized = true
                 }
             }
@@ -76,19 +77,40 @@ class MainActivity : ComponentActivity() {
                                 onToggleTheme = { isDarkTheme = !isDarkTheme }
                             )
                         }
+
                         composable(BottomNavItem.MoodBoard.route) {
+                            val moodboardRepository = MoodboardRepository(databaseHelper = db.databaseHelper)
+                            val colorRepository = ColorRepository(databaseHelper = db.databaseHelper)
+                            val diaryRepository = DiaryRepository(databaseHelper = db.databaseHelper)
+
                             MoodBoardScreen(
                                 isDarkTheme = isDarkTheme,
-                                onToggleTheme = { isDarkTheme = !isDarkTheme }
+                                onToggleTheme = { isDarkTheme = !isDarkTheme },
+                                moodboardRepository = moodboardRepository,
+                                colorRepository = colorRepository,
+                                diaryRepository = diaryRepository,
+                                navController = navController
                             )
                         }
 
-                        composable(BottomNavItem.Diary.route) {
+                        composable(
+                            route = "${BottomNavItem.Diary.route}?date={date}&entry={entry}",
+                            arguments = listOf(
+                                navArgument("date") { defaultValue = "" },
+                                navArgument("entry") { defaultValue = "" }
+                            )
+                        ) { backStackEntry ->
+                            val date = backStackEntry.arguments?.getString("date") ?: ""
+                            val entry = backStackEntry.arguments?.getString("entry") ?: ""
+
                             DiaryScreenContent(
                                 isDarkTheme = isDarkTheme,
-                                onToggleTheme = { isDarkTheme = !isDarkTheme }
+                                onToggleTheme = { isDarkTheme = !isDarkTheme },
+                                date = date,
+                                entry = entry
                             )
                         }
+
                         composable(BottomNavItem.Stats.route) { StatScreen(db) }
                         composable(BottomNavItem.Resources.route) { ResourceScreen() }
                     }

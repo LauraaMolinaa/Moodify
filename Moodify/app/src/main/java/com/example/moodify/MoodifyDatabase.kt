@@ -8,7 +8,7 @@ import java.util.Date
 
 class MoodifyDatabase(context: Context) {
 
-    private val databaseHelper = DatabaseHelper(context)
+    val databaseHelper = DatabaseHelper(context)
     private var _isInitialized: Boolean = false
 
     var isInitialized: Boolean
@@ -116,7 +116,6 @@ class MoodifyDatabase(context: Context) {
         insert_color("blue","sad") //sad colorId 4
         insert_color("white","anxious") //anxious colorId 5
         insert_color("red","depressed") //depressed colorId 6
-
     }
 
     fun getDiaries(): List<Diary> {
