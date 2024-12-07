@@ -122,19 +122,19 @@ fun DiaryScreenContent(
                     OutlinedTextField(
                         value = input1,
                         onValueChange = { input1 = it },
-                        label = { if (input1.isEmpty()) "Input1" else input1 },
+                        label = { if (input1== "") "Input1" else input1 },
                     )
                     // Second input field
                     OutlinedTextField(
                         value = input2,
                         onValueChange = { input2 = it },
-                        label = { if (input2.isEmpty()) "Input2" else input2 },
+                        label = { if (input2== "") "Input2" else input2 },
                     )
                     // Third input field
                     OutlinedTextField(
                         value = input3,
                         onValueChange = { input3 = it },
-                        label = { if (input3.isEmpty()) "Input3" else input3 },
+                        label = { if (input3== "") "Input3" else input3 },
                     )
                 }
             }
@@ -183,7 +183,7 @@ fun DiaryScreenContent(
                     OutlinedTextField(
                         value = entry,
                         onValueChange = { entry = it },
-                        label = { if (entry.isEmpty()) "Diary entry" else entry }
+                        label = { if (entry == "") "Diary entry" else entry }
                     )
                 }
             }
@@ -232,6 +232,7 @@ fun DiaryScreenContent(
                         input3 = input3,
                         entry = entry,
                         index = index,
+                        date = date,
                     ) {
                         input1 = ""
                         input2 = ""
@@ -282,11 +283,11 @@ fun saveData(
     input3: String,
     entry: String,
     index: Int,
+    date: String,
     onClearInputs: () -> Unit
 ): String {
 
     //getting today's date
-    val date = LocalDateTime.now()
     val correctDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
 
 
