@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moodify.app-mergeDebugResources-65:/values-sk/values-sk.xml",
+            "outputFile": "com.example.moodify.app-mergeDebugResources-67:/values-sk/values-sk.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vvile\\.gradle\\caches\\8.9\\transforms\\c327861d777d7078a6ed20bded103ed2\\transformed\\appcompat-1.7.0\\res\\values-sk\\values-sk.xml",

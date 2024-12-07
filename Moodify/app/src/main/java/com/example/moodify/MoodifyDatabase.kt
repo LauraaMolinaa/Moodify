@@ -109,6 +109,11 @@ class MoodifyDatabase(context: Context) {
         db.insert("Moodboard", null, values)
     }
 
+    fun deleteEntryWithNoDate() {
+        val db = databaseHelper.writableDatabase
+        db.delete("Diary", "date IS NULL OR date = ?", arrayOf(""))
+    }
+
     fun populateColorsTable() {
         insert_color("magenta","perfect") //perfect colorId 1
         insert_color("yellow", "happy") //happy colorId 2

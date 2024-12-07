@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moodify.app-mergeDebugResources-65:/values-pt-rBR/values-pt-rBR.xml",
+            "outputFile": "com.example.moodify.app-mergeDebugResources-67:/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vvile\\.gradle\\caches\\8.9\\transforms\\1077c4dd3af858f8ba05a40e2fd248e6\\transformed\\material3-release\\res\\values-pt-rBR\\values-pt-rBR.xml",

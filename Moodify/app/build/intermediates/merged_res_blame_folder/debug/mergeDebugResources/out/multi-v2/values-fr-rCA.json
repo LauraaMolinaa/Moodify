@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moodify.app-mergeDebugResources-65:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "com.example.moodify.app-mergeDebugResources-67:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vvile\\.gradle\\caches\\8.9\\transforms\\48148bb7f6903889421ff0fd2e73226f\\transformed\\ui-release\\res\\values-fr-rCA\\values-fr-rCA.xml",

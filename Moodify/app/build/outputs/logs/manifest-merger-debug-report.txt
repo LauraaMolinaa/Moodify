@@ -48,8 +48,6 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] C:\Users\vvile\.gradle
 MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\cb78104b63a22f98af2b01fe890a1461\transformed\lifecycle-runtime-compose-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\562ef7c2dd582da179342c5659bd98bb\transformed\lifecycle-livedata-core-2.8.6\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\abe2f78895e176db7d5cf8a5b1019427\transformed\lifecycle-process-2.8.6\AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\c184761ce396ccda58c8cfe71262f7c6\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:2:1-5:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\ddfe1c4a2672776bbc4297520fac75ff\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\3abef73bc6306ac9775cd380a8373c9d\transformed\lifecycle-viewmodel-savedstate-2.8.6\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\3aff74dc4d0ae0ae2591538edcce9a80\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\vvile\.gradle\caches\8.9\transforms\82267e866ab8ff3f373e36b8d7a08283\transformed\core-ktx-1.13.1\AndroidManifest.xml:2:1-7:12
@@ -64,6 +62,8 @@ MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\vvile\.gradle\ca
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\vvile\.gradle\caches\8.9\transforms\e19c9c7cf307f4846839d6f9801d3c98\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core:1.13.1] C:\Users\vvile\.gradle\caches\8.9\transforms\d512f5131a7f6573cb8fa8473bed5fc7\transformed\core-1.13.1\AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\e2341d1e7667c00789d1567908f64086\transformed\lifecycle-runtime-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\c184761ce396ccda58c8cfe71262f7c6\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\ddfe1c4a2672776bbc4297520fac75ff\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\114cf5e70c18036c0c4c8d9fec28e996\transformed\lifecycle-viewmodel-ktx-2.8.6\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\b0db7b8a3e2bf85d8d2660a89a32d618\transformed\lifecycle-viewmodel-compose-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.ui:ui-android:1.7.5] C:\Users\vvile\.gradle\caches\8.9\transforms\48148bb7f6903889421ff0fd2e73226f\transformed\ui-release\AndroidManifest.xml:2:1-7:12
@@ -73,6 +73,8 @@ MERGED from [androidx.activity:activity:1.9.3] C:\Users\vvile\.gradle\caches\8.9
 MERGED from [androidx.activity:activity-compose:1.9.3] C:\Users\vvile\.gradle\caches\8.9\transforms\7d0462b5268be6f8d07cbd38dcef929f\transformed\activity-compose-1.9.3\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity-ktx:1.9.3] C:\Users\vvile\.gradle\caches\8.9\transforms\14861eead29bef9460259166ad77933c\transformed\activity-ktx-1.9.3\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\fcffd5e6f0da293d137e09ecf0b09bd9\transformed\lifecycle-runtime-ktx-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\042b5baf6e0292b28a752367f4cff3ec\transformed\datastore-preferences-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.datastore:datastore:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\f47af93f9de91a6e273658275a2bfd26\transformed\datastore-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\vvile\.gradle\caches\8.9\transforms\5f89b721cbe0e99c292f9d447f08d754\transformed\profileinstaller-1.3.1\AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] C:\Users\vvile\.gradle\caches\8.9\transforms\ce8f1ecdd2d1c33862387b2c1308ee28\transformed\runtime-saveable-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-android:1.7.5] C:\Users\vvile\.gradle\caches\8.9\transforms\b127d0bb1ab07e3b3c187bfe2763810a\transformed\runtime-release\AndroidManifest.xml:2:1-7:12
@@ -254,10 +256,6 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] C:\Users\vvile\.g
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\562ef7c2dd582da179342c5659bd98bb\transformed\lifecycle-livedata-core-2.8.6\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\abe2f78895e176db7d5cf8a5b1019427\transformed\lifecycle-process-2.8.6\AndroidManifest.xml:21:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\abe2f78895e176db7d5cf8a5b1019427\transformed\lifecycle-process-2.8.6\AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\c184761ce396ccda58c8cfe71262f7c6\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:4:5-43
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\c184761ce396ccda58c8cfe71262f7c6\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:4:5-43
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\ddfe1c4a2672776bbc4297520fac75ff\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\ddfe1c4a2672776bbc4297520fac75ff\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\3abef73bc6306ac9775cd380a8373c9d\transformed\lifecycle-viewmodel-savedstate-2.8.6\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\3abef73bc6306ac9775cd380a8373c9d\transformed\lifecycle-viewmodel-savedstate-2.8.6\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\3aff74dc4d0ae0ae2591538edcce9a80\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
@@ -286,6 +284,10 @@ MERGED from [androidx.core:core:1.13.1] C:\Users\vvile\.gradle\caches\8.9\transf
 MERGED from [androidx.core:core:1.13.1] C:\Users\vvile\.gradle\caches\8.9\transforms\d512f5131a7f6573cb8fa8473bed5fc7\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\e2341d1e7667c00789d1567908f64086\transformed\lifecycle-runtime-release\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\e2341d1e7667c00789d1567908f64086\transformed\lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\c184761ce396ccda58c8cfe71262f7c6\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\c184761ce396ccda58c8cfe71262f7c6\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\ddfe1c4a2672776bbc4297520fac75ff\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\ddfe1c4a2672776bbc4297520fac75ff\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\114cf5e70c18036c0c4c8d9fec28e996\transformed\lifecycle-viewmodel-ktx-2.8.6\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\114cf5e70c18036c0c4c8d9fec28e996\transformed\lifecycle-viewmodel-ktx-2.8.6\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\b0db7b8a3e2bf85d8d2660a89a32d618\transformed\lifecycle-viewmodel-compose-release\AndroidManifest.xml:5:5-44
@@ -304,6 +306,10 @@ MERGED from [androidx.activity:activity-ktx:1.9.3] C:\Users\vvile\.gradle\caches
 MERGED from [androidx.activity:activity-ktx:1.9.3] C:\Users\vvile\.gradle\caches\8.9\transforms\14861eead29bef9460259166ad77933c\transformed\activity-ktx-1.9.3\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\fcffd5e6f0da293d137e09ecf0b09bd9\transformed\lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] C:\Users\vvile\.gradle\caches\8.9\transforms\fcffd5e6f0da293d137e09ecf0b09bd9\transformed\lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\042b5baf6e0292b28a752367f4cff3ec\transformed\datastore-preferences-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\042b5baf6e0292b28a752367f4cff3ec\transformed\datastore-preferences-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\f47af93f9de91a6e273658275a2bfd26\transformed\datastore-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] C:\Users\vvile\.gradle\caches\8.9\transforms\f47af93f9de91a6e273658275a2bfd26\transformed\datastore-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\vvile\.gradle\caches\8.9\transforms\5f89b721cbe0e99c292f9d447f08d754\transformed\profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\vvile\.gradle\caches\8.9\transforms\5f89b721cbe0e99c292f9d447f08d754\transformed\profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] C:\Users\vvile\.gradle\caches\8.9\transforms\ce8f1ecdd2d1c33862387b2c1308ee28\transformed\runtime-saveable-release\AndroidManifest.xml:5:5-44

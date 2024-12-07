@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moodify.app-mergeDebugResources-65:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.example.moodify.app-mergeDebugResources-67:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vvile\\.gradle\\caches\\8.9\\transforms\\1077c4dd3af858f8ba05a40e2fd248e6\\transformed\\material3-release\\res\\values-en-rAU\\values-en-rAU.xml",

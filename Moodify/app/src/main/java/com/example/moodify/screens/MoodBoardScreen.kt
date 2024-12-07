@@ -21,18 +21,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.moodify.ColorRepository
-import com.example.moodify.DiaryRepository
-import com.example.moodify.MoodboardRepository
 import java.time.LocalDate
 import java.time.Month
 import java.time.YearMonth
 import androidx.compose.ui.text.style.TextAlign
-import com.example.moodify.BottomNavItem
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-
-
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.ui.text.style.TextOverflow
+import com.example.moodify.BottomNavItem
+import com.example.moodify.ColorRepository
+import com.example.moodify.DiaryRepository
+import com.example.moodify.MoodboardRepository
 
 
 fun mapColorNameToComposeColor(name: String): Color {
@@ -127,7 +127,7 @@ fun MoodBoardScreen(
                     val date = day.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                     val diaryId = diaryRepository.getAllDiaries().find { it.date == date }?.id
                     moodboardRepository.insertOrUpdateMoodboard(date, colorId, diaryId)
-                    moods[day] = color // Update UI immediately
+                    moods[day] = color
                 }
             }
         }
@@ -143,7 +143,13 @@ fun MoodBoardScreen(
         )
 
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .padding(8.dp),
             contentPadding = PaddingValues(8.dp)
         ) {
             val filteredEntries = diaryEntries.filter { entry ->
@@ -169,12 +175,15 @@ fun MoodBoardScreen(
                     Text(
                         text = entry.description,
                         style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(2f)
                     )
                 }
                 Divider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
             }
         }
+
     }
 }
 
@@ -237,9 +246,8 @@ fun CalendarGrid(
             }.toSet()
     }
 
-
     Column(modifier = Modifier.fillMaxWidth()) {
-        // Day labels (e.g., Mon, Tue, Wed)
+        // Day labels
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -262,7 +270,6 @@ fun CalendarGrid(
                 .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(12.dp))
                 .padding(8.dp)
         ) {
-            // Empty cells for the first row before the first day of the month
             items(firstDayOfWeek) {
                 Spacer(modifier = Modifier.aspectRatio(1f))
             }
@@ -272,7 +279,7 @@ fun CalendarGrid(
                 val day = index + 1
                 val date = currentMonth.atDay(day)
                 val hasDiaryEntry = diaryDates.contains(date)
-                val moodColor = moods[date] ?: Color.Transparent
+                val moodColor = moods[date]?.copy(alpha = 0.4f) ?: Color.Transparent
 
                 Box(
                     modifier = Modifier
@@ -308,10 +315,11 @@ fun CalendarGrid(
                         )
                         if (hasDiaryEntry) {
                             Spacer(modifier = Modifier.height(2.dp))
-                            Box(
-                                modifier = Modifier
-                                    .size(6.dp)
-                                    .background(Color.Red, shape = CircleShape)
+                            Icon(
+                                imageVector = Icons.Filled.Star,
+                                contentDescription = "Diary Entry Present",
+                                tint = Color(0xFFFFD700),
+                                modifier = Modifier.size(12.dp)
                             )
                         }
                     }
@@ -320,6 +328,7 @@ fun CalendarGrid(
         }
     }
 }
+
 
 
 
@@ -366,21 +375,20 @@ fun MoodColorPickerWithLabels(onColorSelected: (Color) -> Unit) {
 
 fun parseDate(dateString: String): LocalDate {
     return try {
-        // Try to parse ISO format (e.g., 2024-12-04T14:10:48.260483)
         LocalDate.parse(dateString.substringBefore("T"))
     } catch (e: Exception) {
         try {
-            // Try to parse MM/dd/yyyy format
+            // Parse MM/dd/yyyy format
             LocalDate.parse(
                 dateString,
                 java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy")
             )
         } catch (e: Exception) {
             try {
-                // Try to parse dd/MM/yyyy format
+                // Parse dd-MM-yyyy format
                 LocalDate.parse(
                     dateString,
-                    java.time.format.DateTimeFormatter.ofPattern("dd/mm/yyyy")
+                    java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy")
                 )
             } catch (e: Exception) {
                 throw IllegalArgumentException("Unsupported date format: $dateString")
@@ -388,6 +396,7 @@ fun parseDate(dateString: String): LocalDate {
         }
     }
 }
+
 
 
 

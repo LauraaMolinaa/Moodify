@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moodify.app-mergeDebugResources-65:/values-ky/values-ky.xml",
+            "outputFile": "com.example.moodify.app-mergeDebugResources-67:/values-ky/values-ky.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vvile\\.gradle\\caches\\8.9\\transforms\\60fe40db1b5d941a432d70e7ee90f43c\\transformed\\material-1.12.0\\res\\values-ky\\values-ky.xml",
