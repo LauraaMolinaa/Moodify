@@ -32,21 +32,42 @@ import com.example.moodify.MoodifyDatabase
 import com.google.ai.client.generativeai.GenerativeModel
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun DiaryScreenContent(
+    //diaryId: Int,
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit,
     date: String = "",
     entry: String = ""
 ) {
+
+    //val date = LocalDateTime.now()
+    val correctDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+
     val moodifyDatabase = MoodifyDatabase(LocalContext.current)
+
+    val diaryId = moodifyDatabase.getMoodboardDiaryId(correctDate)
+
     var input1 by remember { mutableStateOf("") }
     var input2 by remember { mutableStateOf("") }
     var input3 by remember { mutableStateOf("") }
     var entry by remember { mutableStateOf("") }
     var aiResponse by remember { mutableStateOf("") }
     var index by remember { mutableStateOf(0) }
+
+    if(diaryId != null){
+        val diaryDescription = moodifyDatabase.getDiariesDescription(diaryId)
+        val gratefulnessDescription = moodifyDatabase.getGratefulnessEntries(diaryId)
+
+            input1 = gratefulnessDescription.getOrNull(0) ?: ""
+            input2 = gratefulnessDescription.getOrNull(1)?: ""
+            input3 = gratefulnessDescription.getOrNull(2)?: ""
+            entry = diaryDescription?: ""
+
+    }
+
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -101,19 +122,19 @@ fun DiaryScreenContent(
                     OutlinedTextField(
                         value = input1,
                         onValueChange = { input1 = it },
-                        label = { Text("Input 1") },
+                        label = { if (input1.isEmpty()) "Input1" else input1 },
                     )
                     // Second input field
                     OutlinedTextField(
                         value = input2,
                         onValueChange = { input2 = it },
-                        label = { Text("Input 2") },
+                        label = { if (input2.isEmpty()) "Input2" else input2 },
                     )
                     // Third input field
                     OutlinedTextField(
                         value = input3,
                         onValueChange = { input3 = it },
-                        label = { Text("Input 3") },
+                        label = { if (input3.isEmpty()) "Input3" else input3 },
                     )
                 }
             }
@@ -162,7 +183,7 @@ fun DiaryScreenContent(
                     OutlinedTextField(
                         value = entry,
                         onValueChange = { entry = it },
-                        label = { Text("Diary entry") },
+                        label = { if (entry.isEmpty()) "Diary entry" else entry }
                     )
                 }
             }
@@ -265,17 +286,21 @@ fun saveData(
 ): String {
 
     //getting today's date
-    val date = LocalDateTime.now().toString()
+    val date = LocalDateTime.now()
+    val correctDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+
 
     try {
-        var diaryId = db.insert_diary(entry, date)
+        var diaryId = db.insert_diary(entry, correctDate)
 
-        var gratefulnessId = db.insert_gratefulness(date,diaryId.toInt())
+        var gratefulnessId = db.insert_gratefulness(correctDate,diaryId.toInt())
 
         //var diaryId = db.getDiaries()
         db.insert_gratefulness_entry(input1, gratefulnessId.toInt())
         db.insert_gratefulness_entry(input2, gratefulnessId.toInt())
         db.insert_gratefulness_entry(input3, gratefulnessId.toInt())
+
+        db.updateMoodboardData(diaryId.toInt(), correctDate)
 
         // Clear inputs after saving
         onClearInputs()

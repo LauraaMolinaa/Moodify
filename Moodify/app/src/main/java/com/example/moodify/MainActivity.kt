@@ -130,7 +130,7 @@ class MainActivity : ComponentActivity() {
         db.insert_statistics(1.7, 30.0)
         db.insert_statistics(6.0, 10.5)
         db.insert_statistics(4.7, 67.0)
-
+        /*
         db.insert_diary("diary 1", "03-03-2024")
         db.insert_diary("diary 2", "05-03-2024")
         db.insert_diary("diary 3", "09-03-2024")
@@ -142,7 +142,7 @@ class MainActivity : ComponentActivity() {
         db.insert_moodboard("09-03-2024", 4, 3)
         db.insert_moodboard("13-03-2024", 2, 4)
         db.insert_moodboard("20-03-2024", 2, 5)
-        /*
+
         db.insert_gratefulness("03-03-2024", 1)
         db.insert_gratefulness("05-03-2024", 2)
         db.insert_gratefulness("09-03-2024", 3)

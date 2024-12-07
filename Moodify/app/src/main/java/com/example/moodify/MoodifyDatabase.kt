@@ -135,6 +135,26 @@ class MoodifyDatabase(context: Context) {
         return diaryList
     }
 
+    fun getDiariesDescription(diaryId: Int): String? {
+        val db = databaseHelper.readableDatabase
+        var description: String? = null
+
+        val where = "id = ?"
+        val args = arrayOf(diaryId.toString())
+
+        val cursor = db.query("Diary", arrayOf("description"), where, args, null, null, null)
+
+        with(cursor) {
+            if (moveToFirst()) {
+                description = getString(getColumnIndexOrThrow("description"))
+            }
+            close()
+        }
+
+        return description
+    }
+
+
     fun getStatistics(): List<Statistics> {
         val db = databaseHelper.readableDatabase
         val statisticsList = mutableListOf<Statistics>()
@@ -174,6 +194,38 @@ class MoodifyDatabase(context: Context) {
         return moodboardList
     }
 
+    fun getMoodboardDiaryId(date:String): Int? {
+        val db = databaseHelper.readableDatabase
+        var diaryId: Int? = null
+
+        val where = "date = ?"
+        val args = arrayOf(date)
+
+        val cursor = db.query("Moodboard", arrayOf("diary_id"), where, args, null, null, null)
+
+        with(cursor) {
+            if (moveToFirst()) {
+                diaryId = getInt(getColumnIndexOrThrow("diary_id"))
+            }
+            close()
+        }
+
+        return diaryId
+    }
+
+    fun updateMoodboardData(diaryId:Int, date: String): Int{
+        val db = databaseHelper.writableDatabase
+
+        val values = ContentValues().apply {
+            put("diary_id", diaryId)
+        }
+
+        val where = "date = ?"
+        val args = arrayOf(date)
+
+        return db.update("Moodboard", values, where, args)
+    }
+
     /**
      * Retrieves all the color definitions from the Color table, mapping each color to its
      * associated ID and emotion
@@ -194,4 +246,30 @@ class MoodifyDatabase(context: Context) {
         }
         return colorList
     }
+
+    //getting the gratefullness
+    fun getGratefulnessEntries(diaryId: Int): List<String> {
+        val db = databaseHelper.readableDatabase
+        val gratefulnessEntries = mutableListOf<String>()
+
+        val query = """
+        SELECT GratefulnessEntry.description 
+        FROM GratefulnessEntry
+        INNER JOIN Gratefulness ON GratefulnessEntry.gratefulness_id = Gratefulness.id
+        WHERE Gratefulness.diary_id = ?
+    """
+
+        val cursor = db.rawQuery(query, arrayOf(diaryId.toString()))
+
+        with(cursor) {
+            while (moveToNext()) {
+                val description = getString(getColumnIndexOrThrow("description"))
+                gratefulnessEntries.add(description)
+            }
+            close()
+        }
+        return gratefulnessEntries
+    }
+
+
 }
