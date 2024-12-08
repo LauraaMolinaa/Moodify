@@ -4,6 +4,9 @@ import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
 import androidx.compose.ui.platform.LocalContext
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 import java.util.Date
 
 class MoodifyDatabase(context: Context) {
@@ -197,6 +200,42 @@ class MoodifyDatabase(context: Context) {
             close()
         }
         return moodboardList
+    }
+
+    fun getMoodEntriesForMonth(selectedMonthYear: YearMonth): List<Moodboard> {
+        return getMoodboardData().filter { moodboard ->
+            val entryDate = LocalDate.parse(moodboard.date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+            entryDate.monthValue == selectedMonthYear.monthValue && entryDate.year == selectedMonthYear.year
+        }
+    }
+
+    fun recalculateAndSaveStatistics() {
+        val currentMonth = YearMonth.now()
+        val moodEntriesForMonth = getMoodEntriesForMonth(currentMonth)
+
+        // calculate the average mood
+        val totalMoodSum = moodEntriesForMonth.sumOf { it.colorId }
+        val averageMood = if (moodEntriesForMonth.isNotEmpty()) {
+            totalMoodSum.toDouble() / moodEntriesForMonth.size
+        } else {
+            0.0
+        }
+
+        // calculate diary adherence
+        val totalDaysInMonth = currentMonth.lengthOfMonth()
+        val uniqueDiaryDates = getDiaries().map { diary ->
+            LocalDate.parse(diary.date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        }.filter { it.month == currentMonth.month && it.year == currentMonth.year }
+            .distinct()
+
+        val diaryAdherence = (uniqueDiaryDates.size.toDouble() / totalDaysInMonth) * 100
+
+        val db = databaseHelper.writableDatabase
+        db.execSQL("DELETE FROM Statistics")
+        db.execSQL("DELETE FROM sqlite_sequence WHERE name='Statistics'")
+
+        // save the updated statistics (average mood and diary adherence)
+        insert_statistics(averageMood, diaryAdherence)
     }
 
     fun getMoodboardDiaryId(date:String): Int? {

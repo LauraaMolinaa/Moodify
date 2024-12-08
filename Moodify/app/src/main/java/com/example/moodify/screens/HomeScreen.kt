@@ -7,6 +7,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -15,17 +21,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.moodify.MoodifyDatabase
+import java.util.Locale
 
 
 @Composable
 fun HomeScreenContent(
+    db: MoodifyDatabase,
     lastDiaryEntryDate: String,
     totalDiaryEntries: Int,
-    averageMood: Double,
-    progress: Double,
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
+    var averageMood by remember { mutableDoubleStateOf(0.0) }
+    var progress by remember { mutableDoubleStateOf(0.0) }
+
+    LaunchedEffect(Unit) {
+        db.recalculateAndSaveStatistics()
+        val latestStatistics = db.getStatistics().lastOrNull()
+        if (latestStatistics != null) {
+            averageMood = latestStatistics.averageMood
+            progress = latestStatistics.diaryAdherence
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,9 +69,9 @@ fun MainButtonsWithDynamicData(
     progress: Double
 ) {
     val sections = listOf(
-        "Mood Tracker" to "Last entry: $lastDiaryEntryDate\nYour progress: $progress%",
+        "Mood Tracker" to "Last entry: $lastDiaryEntryDate\nYour progress: ${String.format(Locale.CANADA, "%.2f", progress)}%",
         "Diary" to "Last entry: $lastDiaryEntryDate\nEntries: $totalDiaryEntries",
-        "Statistics" to "Average mood: $averageMood\nThis month’s insights",
+        "Statistics" to "Average mood: ${String.format(Locale.CANADA, "%.2f", averageMood)}\nThis month’s insights",
         "Resources" to "Explore resources"
     )
 

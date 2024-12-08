@@ -33,6 +33,7 @@ import com.example.moodify.BottomNavItem
 import com.example.moodify.ColorRepository
 import com.example.moodify.DiaryRepository
 import com.example.moodify.MoodboardRepository
+import com.example.moodify.MoodifyDatabase
 
 
 fun mapColorNameToComposeColor(name: String): Color {
@@ -49,6 +50,7 @@ fun mapColorNameToComposeColor(name: String): Color {
 
 @Composable
 fun MoodBoardScreen(
+    db: MoodifyDatabase,
     isDarkTheme: Boolean,
     onToggleTheme: () -> Unit,
     moodboardRepository: MoodboardRepository,
@@ -115,6 +117,7 @@ fun MoodBoardScreen(
             diaryRepository = diaryRepository,
             onMoodUpdated = { date, color ->
                 moods[date] = color // Update the UI after database change
+                db.recalculateAndSaveStatistics()
             }
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -396,7 +399,3 @@ fun parseDate(dateString: String): LocalDate {
         }
     }
 }
-
-
-
-

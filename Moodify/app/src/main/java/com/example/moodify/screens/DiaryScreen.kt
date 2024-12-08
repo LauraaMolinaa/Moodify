@@ -61,10 +61,10 @@ fun DiaryScreenContent(
         val diaryDescription = moodifyDatabase.getDiariesDescription(diaryId)
         val gratefulnessDescription = moodifyDatabase.getGratefulnessEntries(diaryId)
 
-            input1 = gratefulnessDescription.getOrNull(0) ?: ""
-            input2 = gratefulnessDescription.getOrNull(1)?: ""
-            input3 = gratefulnessDescription.getOrNull(2)?: ""
-            entry = diaryDescription?: ""
+        input1 = gratefulnessDescription.getOrNull(0) ?: ""
+        input2 = gratefulnessDescription.getOrNull(1)?: ""
+        input3 = gratefulnessDescription.getOrNull(2)?: ""
+        entry = diaryDescription?: ""
 
     }
 
@@ -302,6 +302,8 @@ fun saveData(
         db.insert_gratefulness_entry(input3, gratefulnessId.toInt())
 
         db.updateMoodboardData(diaryId.toInt(), correctDate)
+
+        db.recalculateAndSaveStatistics()
 
         // Clear inputs after saving
         onClearInputs()
