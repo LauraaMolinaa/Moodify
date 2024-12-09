@@ -61,8 +61,8 @@ class MainActivity : ComponentActivity() {
             // Initialize the database with dummy data once
             LaunchedEffect(Unit) {
                 if (!db.isInitialized) {
-//                    db.reset_db_data()
-//                    populateDbDummyData(db)
+                    db.reset_db_data()
+                    populateDbDummyData(db)
                     db.isInitialized = true
                 }
             }
@@ -150,7 +150,8 @@ class MainActivity : ComponentActivity() {
         //what color is what number
         db.populateColorsTable()
         // Predefined colors
-        val moodColors = listOf("magenta", "yellow", "green", "blue", "white", "red")
+        //val moodColors = listOf("magenta", "yellow", "green", "blue", "white", "red")
+        val moodColors = listOf("magenta", "yellow", "green", "blue", "red")
 
         // Dummy data entries
         val dummyData = listOf(

@@ -42,7 +42,7 @@ fun mapColorNameToComposeColor(name: String): Color {
         "yellow" -> Color.Yellow
         "green" -> Color.Green
         "blue" -> Color.Blue
-        "white" -> Color.White
+        //"white" -> Color.White
         "red" -> Color.Red
         else -> Color.Transparent
     }

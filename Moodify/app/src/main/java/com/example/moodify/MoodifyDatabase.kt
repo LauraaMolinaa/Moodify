@@ -122,7 +122,7 @@ class MoodifyDatabase(context: Context) {
         insert_color("yellow", "happy") //happy colorId 2
         insert_color("green", "okay") //okay colorId 3
         insert_color("blue","sad") //sad colorId 4
-        insert_color("white","anxious") //anxious colorId 5
+        //insert_color("white","anxious") //anxious colorId 5
         insert_color("red","depressed") //depressed colorId 6
     }
 
