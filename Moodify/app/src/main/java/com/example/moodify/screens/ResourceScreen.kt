@@ -100,7 +100,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             "Phone numbers:",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.9f),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(6.dp),
@@ -110,7 +110,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             items(items = phoneNumbers) { number ->
                                 Text(
                                     number,
-                                    color = MaterialTheme.colorScheme.primary
+                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.9f)
                                 )
                             }
                         }
@@ -145,7 +145,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             "Websites:",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.9f),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(6.dp),
@@ -155,7 +155,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             items(items = websites) { site ->
                                 Text(
                                     site,
-                                    color = MaterialTheme.colorScheme.primary
+                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.9f)
                                 )
                             }
                         }
@@ -191,7 +191,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             "Apps:",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.9f),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(6.dp),
@@ -201,7 +201,7 @@ fun ResourceScreen(mod: Modifier = Modifier) {
                             items(items = apps) { app ->
                                 Text(
                                     app,
-                                    color = MaterialTheme.colorScheme.primary
+                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.9f)
                                 )
                             }
                         }
