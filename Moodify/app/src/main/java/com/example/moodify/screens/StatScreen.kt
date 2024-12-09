@@ -33,17 +33,11 @@ import java.time.YearMonth
 @Composable
 fun StatScreen(db: MoodifyDatabase) {
 
-    // all mood entries from the Moodboard table
-    // val moodEntries = db.getMoodboardData()
-
     // state to track the selected month and year
     var selectedMonthYear by remember { mutableStateOf(YearMonth.now()) }
 
     // filter mood entries by selected month
-    val moodEntriesForMonth = db.getMoodboardData().filter { moodboard ->
-        val entryDate = LocalDate.parse(moodboard.date, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-        entryDate.monthValue == selectedMonthYear.monthValue && entryDate.year == selectedMonthYear.year
-    }
+    val moodEntriesForMonth = db.getMoodEntriesForMonth(selectedMonthYear)
 
     // determine the total number of mood entries for the selected month
     val totalEntries = moodEntriesForMonth.size

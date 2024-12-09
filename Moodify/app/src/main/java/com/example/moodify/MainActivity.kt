@@ -69,11 +69,8 @@ class MainActivity : ComponentActivity() {
 
             // Fetch data for HomeScreen
             val diaryEntries = db.getDiaries()
-            val statistics = db.getStatistics()
             val lastDiaryEntry = diaryEntries.maxByOrNull { it.id }
             val totalDiaryEntries = diaryEntries.size
-            val averageMood = if (statistics.isNotEmpty()) statistics.map { it.averageMood }.average() else 0.0
-            val progress = statistics.lastOrNull()?.diaryAdherence ?: 0.0
 
             MoodifyTheme(darkTheme = isDarkTheme) {
                 MoodifyScaffold(
@@ -99,10 +96,9 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(BottomNavItem.Home.route) {
                             HomeScreenContent(
+                                db = db,
                                 lastDiaryEntryDate = lastDiaryEntry?.date ?: "No entries",
                                 totalDiaryEntries = totalDiaryEntries,
-                                averageMood = averageMood,
-                                progress = progress,
                                 isDarkTheme = isDarkTheme,
                                 onToggleTheme = { isDarkTheme = !isDarkTheme }
                             )
@@ -114,6 +110,7 @@ class MainActivity : ComponentActivity() {
                             val diaryRepository = DiaryRepository(databaseHelper = db.databaseHelper)
 
                             MoodBoardScreen(
+                                db = db,
                                 isDarkTheme = isDarkTheme,
                                 onToggleTheme = { isDarkTheme = !isDarkTheme },
                                 moodboardRepository = moodboardRepository,
@@ -151,7 +148,7 @@ class MainActivity : ComponentActivity() {
 
     private fun populateDbDummyData(db: MoodifyDatabase) {
         //what color is what number
-                db.populateColorsTable()
+        db.populateColorsTable()
         // Predefined colors
         val moodColors = listOf("magenta", "yellow", "green", "blue", "white", "red")
 
