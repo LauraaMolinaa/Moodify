@@ -46,3 +46,9 @@ Our app will have the following features:
 
 ## Road Map 
 [Notion link](https://cold-allium-2b3.notion.site/moodify-project-appdevproject47592758248?pvs=4)
+
+# Usage
+- Clone the repository: `git clone https://github.com/LauraaMolinaa/Moodify.git`
+- Install [Android Studio](https://developer.android.com/studio).
+- Open the repository in Android Studio.
+- Run the app in Android Studio by clicking **Run > Run 'app'**.
